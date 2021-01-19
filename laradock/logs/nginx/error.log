@@ -1,0 +1,9 @@
+2021/01/03 09:52:01 [emerg] 12#12: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/individualka.ru.conf:3
+2021/01/03 09:52:54 [emerg] 9#9: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/individualka.ru.conf:3
+2021/01/03 11:05:10 [emerg] 10#10: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/individualka.ru.conf:3
+2021/01/03 11:05:31 [emerg] 9#9: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/individualka.ru.conf:3
+2021/01/14 19:41:28 [warn] 9#9: conflicting server name "filing-app.npi-tu.ru" on 0.0.0.0:80, ignored
+2021/01/14 19:43:43 [warn] 9#9: conflicting server name "filing-app.npi-tu.ru" on 0.0.0.0:80, ignored
+2021/01/18 16:01:42 [emerg] 9#9: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/test-frigate.ru.conf:4
+2021/01/18 16:03:14 [emerg] 10#10: a duplicate default server for 0.0.0.0:80 in /etc/nginx/sites-available/test-frigate.ru.conf:4
+2021/01/19 17:30:42 [emerg] 9#9: open() "/var/www/filing-app.npi-tu.ru/filing-app.npi-tu.ru.error.log" failed (2: No such file or directory)

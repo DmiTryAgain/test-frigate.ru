@@ -1,0 +1,30 @@
+create table smp(
+id serial primary key,
+name varchar(255)
+);
+
+create table inspection(
+id serial primary key,
+name varchar(255)
+);
+
+create table checklist(
+id serial primary key,
+smp integer references smp(id),
+inspection integer references inspection(id),
+datefrom timestamp with time zone [0],
+dateto timestamp with time zone [0],
+duration integer
+);
+
+insert into smp (name) values ('ООО "Колосок"');
+insert into smp (name) values ('ПАО "МТС"');
+insert into inspection (name) values ('Роскомнадзор');
+insert into inspection (name) values ('Налоговая');
+insert into inspection (name) values ('Природнадзор');
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 2, '{2009-06-12}', '{2009-06-17}', 5);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 1, '{2009-07-15}', '{2009-06-23}', 9);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (2, 1, '{2010-09-06}', '{2010-10-22}', 20);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (2, 2, '{2012-02-16}', '{2012-03-01}', 11);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 2, '{2010-12-12}', '{2009-12-31}', 7);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 1, '{2011-03-01}', '{2011-03-12}', 3);
