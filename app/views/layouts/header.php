@@ -5,27 +5,30 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item <?= Yii::$app->request->pathInfo == '' ? 'active' : ''; ?>">
-                <a href="<?= yii\helpers\Url::to('/') ?>" class="nav-link ">
-                    <h5>
+            <li class="nav-item">
+                <h5>
+                    <a href="<?= yii\helpers\Url::to('/') ?>"
+                       class="nav-link <?= Yii::$app->request->pathInfo == '' ? 'active' : ''; ?>">
                         <i class="fas fa-clipboard-list fa-lg" style="margin-right: 7px;">
                         </i>Перечень плановых проверок
-                    </h5>
-                </a>
+                    </a>
+                </h5>
             </li>
-            <li class="nav-item  <?= Yii::$app->request->pathInfo == 'frigate/addrow' ? 'active' : ''; ?>">
-                <a href="<?= yii\helpers\Url::to('frigate/addrow') ?>" class="nav-link">
-                    <h5>
+            <li class="nav-item">
+                <h5>
+                    <a href="<?= yii\helpers\Url::to('frigate/addrow') ?>"
+                       class="nav-link  <?= Yii::$app->request->pathInfo == 'frigate/addrow' ? 'active' : ''; ?>">
                         <i class="fas fa-plus fa-lg" style="margin-right: 5px;"></i>Добавление проверки
-                    </h5>
-                </a>
+                    </a>
+                </h5>
             </li>
-            <li class="nav-item <?= Yii::$app->request->pathInfo == 'frigate/info' ? 'active' : ''; ?>">
-                <a href="<?= yii\helpers\Url::to('frigate/info') ?>" class="nav-link">
-                    <h5>
+            <li class="nav-item">
+                <h5>
+                    <a href="<?= yii\helpers\Url::to('frigate/info') ?>"
+                       class="nav-link <?= Yii::$app->request->pathInfo == 'frigate/info' ? 'active' : ''; ?>">
                         <i class="fas fa-info fa-lg" style="margin-right: 5px;"></i>Справка
-                    </h5>
-                </a>
+                    </a>
+                </h5>
             </li>
         </ul>
     </div>
