@@ -10,6 +10,7 @@ use Yii;
 use yii\data\Pagination;
 use yii\db\ActiveRecord;
 use yii\db\Query;
+use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -18,7 +19,7 @@ class FrigateController extends Controller
 
     public function actionSmpName($q = null)
     {
-        $data = Checklist::find()->select('smp')->orderBy('smp')->all();
+        $data = Checklist::find()->select('smp')->distinct()->orderBy('smp')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->smpName->name];
@@ -28,7 +29,7 @@ class FrigateController extends Controller
 
     public function actionInspectionName($q = null)
     {
-        $data = Checklist::find()->select('inspection')->orderBy('inspection')->all();
+        $data = Checklist::find()->select('inspection')->distinct()->orderBy('inspection')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->inspectionName->name];
@@ -38,7 +39,7 @@ class FrigateController extends Controller
 
     public function actionDateFrom($q = null)
     {
-        $data = Checklist::find()->select('datefrom')->orderBy('datefrom')->all();
+        $data = Checklist::find()->select('datefrom')->distinct()->orderBy('datefrom')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => Yii::$app->formatter->asDate($d->datefrom[0])];
@@ -48,7 +49,7 @@ class FrigateController extends Controller
 
     public function actionDateTo($q = null)
     {
-        $data = Checklist::find()->select('dateto')->orderBy('dateto')->all();
+        $data = Checklist::find()->select('dateto')->distinct()->orderBy('dateto')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => Yii::$app->formatter->asDate($d->dateto[0])];
@@ -56,22 +57,20 @@ class FrigateController extends Controller
         return Json::encode($out);
     }
 
-    public function search()
+    public function getQuery()
     {
-
-    }
-
-    public static function getQuery()
-    {
-        $query = Checklist::find()->with('smpName', 'inspectionName')->orderBy(['smp' => SORT_ASC]);
-
-        if(isset($_POST['smp']))
+        $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
+        foreach ($_POST as $key => $value)
         {
-            $a = $_POST['smp'];
-            $query = Checklist::find()->leftJoin('smp','checklist.smp = smp.id')->where(['like','smp.name', $a])->orderBy(['smp' => SORT_ASC]);
+            if (!empty($value)  && $key !== '_csrf' && $key !== 'gridradio'){
+                if ($key !== 'datefrom' && $key !== 'dateto'){
+                    $query->andWhere(['like', $key . '.name', $value]);
+                } elseif ($key == 'datefrom' || $key == 'dateto'){
+                    $query->andWhere(['=', $key, '{'.Yii::$app->formatter->asDate($value, 'yyyy-MM-dd').'}']);
+                }
+            }
         }
-        return $query;
-
+        return $query->orderBy(['datefrom' => SORT_ASC]);
     }
 
     public function getPages()
@@ -103,7 +102,8 @@ class FrigateController extends Controller
 
     public function actionAddrow()
     {
-        return $this->render('addrow');
+        $model = new Checklist();
+        return $this->render('addrow', compact('model'));
     }
 
     public function actionInfo()
@@ -111,22 +111,35 @@ class FrigateController extends Controller
         return $this->render('info');
     }
 
-    public function getCsv($mydata)
+    /*public function actionSaveData()
     {
-        header('Content-Type: text/csv; charset=windows-1251');
-        header('Content-Disposition: attachment; filename=export-full-table.csv');
-        $output = fopen('php://output', 'w');
-        foreach ($mydata as $key => $value) {
-            fputcsv($output, $value, ';');
+
+            $query = new Checklist();
+            if (!empty($value)  && $key !== '_csrf'){
+                if ($key !== 'datefrom' && $key !== 'dateto'){
+                    $query->with(['smpName', 'inspectionName']);
+                } elseif ($key == 'datefrom'){
+                    $query->andWhere(['=', $key, '{'.Yii::$app->formatter->asDate($value, 'yyyy-MM-dd').'}']);
+                }
+            }
+
+        return $query->orderBy(['datefrom' => SORT_ASC]);
+    }*/
+
+    public function actionGetCsv()
+    {
+
+        /*$query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
+
+        $output = fopen('export-data.csv', 'w');
+        foreach ($query as $value) {
+            fputcsv($output, $value['dateto'], ';');
         }
         fclose($output);
+        header("Content-Type: application/download");
+        header("Content-Disposition: attachment;filename=export-data.csv");
+        header("Content-Transfer-Encoding: Binary");
+        return $output;*/
+
     }
-
-    public function actionDownloadExcel()
-    {
-        $this->getCsv($this->getQuery());
-        return $this->render('downloadExcel');
-    }
-
-
 }

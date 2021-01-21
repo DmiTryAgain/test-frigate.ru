@@ -4,15 +4,14 @@
 
 use kartik\form\ActiveForm;
 use kartik\typeahead\Typeahead;
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use kartik\export\ExportMenu;
 
 $this->title = Yii::$app->name;
 
 ?>
-<?php var_dump($_POST) ?>
+<?php print_r($_POST) ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
@@ -107,10 +106,14 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="row form-group row">
-                <div class="offset-md-4 offset-sm-3 col-sm-2 col-form-label">
+                <div class="offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
                     <!--Кнопка поиска-->
-                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary',]) ?>
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'href' => 'frigate/get-query']) ?>
+
                     <!--Конец кнопки поиска-->
+                </div>
+                <div class="col-sm-2 col-form-label">
+                    <?= Html::resetButton('Очистить', ['class' => 'btn btn-secondary']) ?>
                 </div>
                 <div class="col-sm-2 col-form-label">
                     <!--Кнопка с выпадающим списком-->
@@ -121,16 +124,16 @@ $this->title = Yii::$app->name;
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item badge-success"
-                           href="<?= yii\helpers\Url::to('frigate/download-excel') ?>">Экспортировать найденное в
+                           href="<?= yii\helpers\Url::to('frigate/get-csv') ?>">Экспортировать найденное в
                             Excell</a>
                         <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
                         <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
-                        <a class="dropdown-item badge-info" href="#">Добавить</a>
+                        <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
                     </div>
                 </div>
             </div>
             <!--Конец кнопки с выпадающим списком-->
-            <?php ActiveForm::end(); ?>
+
         </div>
     </div>
     <div class="row">
@@ -138,7 +141,10 @@ $this->title = Yii::$app->name;
             <div class="row">
                 <div class="col-md-10">
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
+                        <?php
+                            if (!empty($mydata)){
 
+                            ?>
                         <tr class="table-primary">
                             <th scope="col" rowspan="2">Отметить выбор</th>
                             <th scope="col" rowspan="2">Проверяемый СМП</th>
@@ -147,18 +153,17 @@ $this->title = Yii::$app->name;
                             <th scope="col" rowspan="2">Плановая длительность</th>
                         </tr>
                         <tr class="table-primary">
-
                             <th scope="col">С</th>
                             <th scope="col">По</th>
                         </tr>
                         <tbody>
-                        <?php $form = ActiveForm::begin(
-                            ['id' => 'radio']
-                        ); ?>
-                            <?php foreach ($mydata as $data): ?>
+
+                            <?php
+
+                            foreach ($mydata as $data): ?>
                                 <tr>
                                     <th scope="row">
-                                        <?= Html::radio('gridRadio', false, ['id' => 'gridRadio' . $data->id, 'value' => 'option' . $data->id]) ?>
+                                        <?= Html::radio('gridradio', false, ['id' => 'gridRadio' . $data->id, 'value' => 'option' . $data->id]) ?>
                                     </th>
                                     <td><?= $data->smpName->name; ?></td>
                                     <td><?= $data->inspectionName->name; ?></td>
@@ -166,13 +171,17 @@ $this->title = Yii::$app->name;
                                     <td><?= Yii::$app->formatter->asDate($data->dateto[0]); ?></td>
                                     <td><?= $data->duration; ?></td>
                                 </tr>
-                            <?php endforeach; ?>
-                        <?php ActiveForm::end(); ?>
+                            <?php endforeach;
+
+                            } else {?>
+                                <h5 style="text-align: center">Ничего не найдено</h5>
+                                <?php
+                            }?>
                         </tbody>
                     </table>
 
 
-                    <?= yii\widgets\LinkPager::widget([
+                    <?=  yii\widgets\LinkPager::widget([
                         'pagination' => $pages,
                         'maxButtonCount' => 7,
                         'firstPageLabel' => 'Начало',
@@ -186,6 +195,7 @@ $this->title = Yii::$app->name;
                         'disabledPageCssClass' => 'page-link disabled',
                         'activePageCssClass' => 'page-item active',
                     ]) ?>
+                    <?php ActiveForm::end(); ?>
                 </div>
             </div>
         </div>
