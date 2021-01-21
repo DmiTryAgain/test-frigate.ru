@@ -19,7 +19,7 @@ class FrigateController extends Controller
 
     public function actionSmpName($q = null)
     {
-        $data = Checklist::find()->select('smp')->distinct()->orderBy('smp')->all();
+        $data = Checklist::find()->select('smp')->joinWith(['smpName', 'inspectionName'])->where(['ilike', 'smp.name', $q])->distinct()->orderBy('smp')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->smpName->name];
@@ -59,23 +59,24 @@ class FrigateController extends Controller
 
     public function getQuery()
     {
+
         $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
-        foreach ($_POST as $key => $value)
-        {
-            if (!empty($value)  && $key !== '_csrf' && $key !== 'gridradio'){
-                if ($key !== 'datefrom' && $key !== 'dateto'){
-                    $query->andWhere(['like', $key . '.name', $value]);
-                } elseif ($key == 'datefrom' || $key == 'dateto'){
-                    $query->andWhere(['=', $key, '{'.Yii::$app->formatter->asDate($value, 'yyyy-MM-dd').'}']);
+        if (isset($_GET)){
+            foreach ($_GET as $key => $value) {
+                if (!empty($value) && $key !== 'gridradio' && $key !== 'page') {
+                    if ($key !== 'datefrom' && $key !== 'dateto') {
+                        $query->andWhere(['like', $key . '.name', $value]);
+                    } elseif ($key == 'datefrom' || $key == 'dateto') {
+                        $query->andWhere(['=', $key, '{' . Yii::$app->formatter->asDate($value, 'yyyy-MM-dd') . '}']);
+                    }
                 }
             }
         }
-        return $query->orderBy(['datefrom' => SORT_ASC]);
+        return $query->orderBy(['datefrom' => SORT_DESC]);
     }
 
-    public function getPages()
+    public function getPages($query)
     {
-        $query = $this->getQuery();
         $pages = new Pagination([
             'totalCount' => $query->count(),
             'pageSize' => 2,
@@ -88,15 +89,16 @@ class FrigateController extends Controller
     public function getData()
     {
         $query = $this->getQuery();
-        $pages = $this->getPages();
+        $pages = $this->getPages($query);
         $mydata = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return $mydata;
+        return [$mydata, $pages];
     }
 
     public function actionIndex()
     {
-        $pages = $this->getPages();
-        $mydata = $this->getData();
+        $arr = $this->getData();
+        $mydata = $arr[0];
+        $pages = $arr[1];
         return $this->render('index', compact('mydata', 'pages'));
     }
 
@@ -128,18 +130,26 @@ class FrigateController extends Controller
 
     public function actionGetCsv()
     {
-
-        /*$query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
-
-        $output = fopen('export-data.csv', 'w');
+        var_dump($_GET);
+        $query = $this->getQuery()->all();
+        $titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
+        $output = fopen('export-data.csv', 'a+w');
+        fwrite($output,  iconv('UTF-8', 'Windows-1251',implode(';', $titles) . "\r\n"));
         foreach ($query as $value) {
-            fputcsv($output, $value['dateto'], ';');
+            $arr = [
+                $value->smpName->name,
+                $value->inspectionName->name,
+                Yii::$app->formatter->asDate($value->datefrom[0]),
+                Yii::$app->formatter->asDate($value->dateto[0]),
+                $value->duration,
+            ];
+            fwrite($output,  iconv('UTF-8', 'Windows-1251',implode(';', $arr) . "\r\n"));
         }
-        fclose($output);
-        header("Content-Type: application/download");
+        header("Content-Type: application/x-force-csv");
+        header("Cache-Control: no-cache, must-revalidate");
         header("Content-Disposition: attachment;filename=export-data.csv");
-        header("Content-Transfer-Encoding: Binary");
-        return $output;*/
-
+        readfile('export-data.csv');
+        fclose($output);
+        unlink('export-data.csv');
     }
 }

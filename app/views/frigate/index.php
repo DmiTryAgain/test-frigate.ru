@@ -7,17 +7,19 @@ use kartik\typeahead\Typeahead;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use kartik\export\ExportMenu;
+use yii\web\UrlManager;
 
 $this->title = Yii::$app->name;
 
 ?>
-<?php print_r($_POST) ?>
+<?php /*print_r($_GET)*/ ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
             <?php $form = ActiveForm::begin(
-                    ['id' => 'search']
+                ['id' => 'search', 'method' => 'get']
             ); ?>
+
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Наименование СМП</label>
                 <div class="col-md-6">
@@ -106,13 +108,13 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="row form-group row">
-                <div class="offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
+                <div class="offset-xl-4 offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
                     <!--Кнопка поиска-->
-                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'href' => 'frigate/get-query']) ?>
-
+                    <?php /*Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'href' => 'frigate/get-query'])*/ ?>
+                    <?= Html::a('Поиск', (new yii\web\UrlManager)->createUrl('frigate/get-csv'), ['data-method' => 'GET', 'class' => 'btn btn-primary']) ?>
                     <!--Конец кнопки поиска-->
                 </div>
-                <div class="col-sm-2 col-form-label">
+                <div class="col-sm-2 col-xl-3 col-form-label">
                     <?= Html::resetButton('Очистить', ['class' => 'btn btn-secondary']) ?>
                 </div>
                 <div class="col-sm-2 col-form-label">
@@ -123,9 +125,11 @@ $this->title = Yii::$app->name;
                         Дополнительные действия
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item badge-success"
-                           href="<?= yii\helpers\Url::to('frigate/get-csv') ?>">Экспортировать найденное в
-                            Excell</a>
+
+                        <?php /*Html::button('Экспортировать найденное в Excell', ['class' => 'btn btn-success', 'href' => 'frigate/get-csv'])*/ ?>
+                        <?php /*Html::submitInput('Экспортировать найденное в Excell', ['class' => 'btn btn-success', 'href' =>'frigate/get-csv'])*/ ?>
+                        <!--<a class="dropdown-item badge-success" href="<?/*= yii\helpers\Url::to('frigate/get-csv') */?>">Экспортировать найденное в Excell</a>-->
+                        <?= Html::a('Экспортировать найденное в Excell', (new yii\web\UrlManager)->createUrl('frigate/get-csv'), ['data-method' => 'GET', 'class' => 'dropdown-item badge-success']) ?>
                         <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
                         <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
                         <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>

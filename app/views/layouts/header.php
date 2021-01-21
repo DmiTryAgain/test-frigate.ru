@@ -8,7 +8,7 @@
             <li class="nav-item">
                 <h5>
                     <a href="<?= yii\helpers\Url::to('/') ?>"
-                       class="nav-link <?= Yii::$app->request->pathInfo == '' ? 'active' : ''; ?>">
+                       class="nav-link <?= Yii::$app->request->pathInfo == '' || '/page' ? 'active' : ''; ?>">
                         <i class="fas fa-clipboard-list fa-lg" style="margin-right: 7px;">
                         </i>Перечень плановых проверок
                     </a>

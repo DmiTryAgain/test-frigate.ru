@@ -1,1 +1,389 @@
 2021/01/20 07:25:50 [error] 11#11: *404 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Cannot use [] for reading in /var/www/app/views/frigate/index.php on line 14" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/frigate/info"
+2021/01/21 09:16:44 [error] 11#11: *1135 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'dc3c87aa2a99',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/21 09:17:02 [error] 11#11: *1135 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'dc3c87aa2a99',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/21 09:42:07 [error] 11#11: *1171 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'dc3c87aa2a99',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/21 09:43:21 [error] 11#11: *1175 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: fputcsv() expects parameter 2 to be array, string given in /var/www/app/controllers/FrigateController.php:138
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'fputcsv() expec...', '/var/www/app/co...', 138, Array)
+#1 /var/www/app/controllers/FrigateController.php(138): fputcsv(Resource id #6, '\xD0\x9E\xD0\x9E\xD0\x9E "\xD0\x9A\xD0\xBE\xD0\xBB\xD0...', ';')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+ 
+2021/01/21 09:43:28 [error] 14#14: *1189 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: fputcsv() expects parameter 2 to be array, string given in /var/www/app/controllers/FrigateController.php:138
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'fputcsv() expec...', '/var/www/app/co...', 138, Array)
+#1 /var/www/app/controllers/FrigateController.php(138): fputcsv(Resource id #5, '\xD0\x9E\xD0\x9E\xD0\x9E "\xD0\x9A\xD0\xBE\xD0\xBB\xD0...', ';')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+ 
+2021/01/21 09:45:06 [error] 11#11: *1209 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: fputcsv() expects parameter 2 to be array, string given in /var/www/app/controllers/FrigateController.php:138
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'fputcsv() expec...', '/var/www/app/co...', 138, Array)
+#1 /var/www/app/controllers/FrigateController.php(138): fputcsv(Resource id #6, '\xD0\x9E\xD0\x9E\xD0\x9E "\xD0\x9A\xD0\xBE\xD0\xBB\xD0...', ';')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+ 
+2021/01/21 09:47:06 [error] 11#11: *1213 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: fputcsv() expects parameter 2 to be array, string given in /var/www/app/controllers/FrigateController.php:138
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'fputcsv() expec...', '/var/www/app/co...', 138, Array)
+#1 /var/www/app/controllers/FrigateController.php(138): fputcsv(Resource id #6, '\xD0\x9E\xD0\x9E\xD0\x9E "\xD0\x9A\xD0\xBE\xD0\xBB\xD0...', ';')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+ 
+2021/01/21 09:47:06 [error] 11#11: *1213 FastCGI sent in stderr: "ient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    'PHP_CPPFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'PHP_ASC_URL' => 'https://www.php.net/distributions/php-7.4.14.tar.xz.asc',
+    'PHP_URL' => 'https://www.php.net/distributions/php-7.4.14.tar.xz',
+    'DOCKER_CERT_PATH' => '/certs/client',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'OCI_VERSION' => '12',
+    'FAKETIME' => '-0',
+    'DEBIAN_FRONTEND' => 'noninteractive',
+    'PUID' => '1000',
+    'DOCKER_TLS_CERTDIR' => '/certs',
+    'DOCKER_HOST' => 'tcp://docker-in-docker:2376',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c',
+    'OCI_INCLUDE_DIR' => '/opt/oracle/instantclient_12_1/sdk/include',
+    'LC_ALL' => 'POSIX',
+    'PWD' => '/var/www',
+    'PHP_SHA256' => 'f9f3c37969fcd9006c1dbb1dd76ab53f28c698a1646fa2dde8547c3f45e02886',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_COOKIE' => '_csrf=ea7b5346a5817601eadf2f6fddaba1a8792438fae842d014c66a662979726180a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22mq5J0lxO5OzCZ-u2l5LElr47lsMUpVQz%22%3B%7D',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://test-frigate.ru/frigate/',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH
+2021/01/21 10:20:20 [error] 11#11: *1348 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 136. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'dc3c87aa2a99',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/21 12:18:29 [error] 11#11: *2336 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 133. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Cannot modify header information - headers already sent by (output started at /var/www/app/controllers/FrigateController.php:133) in /var/www/app/controllers/FrigateController.php:147
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'Cannot modify h...', '/var/www/app/co...', 147, Array)
+#1 /var/www/app/controllers/FrigateController.php(147): header('Content-Type: a...')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantcl
+2021/01/21 12:20:28 [error] 11#11: *2355 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 132. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Cannot modify header information - headers already sent by (output started at /var/www/app/controllers/FrigateController.php:132) in /var/www/app/controllers/FrigateController.php:146
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'Cannot modify h...', '/var/www/app/co...', 146, Array)
+#1 /var/www/app/controllers/FrigateController.php(146): header('Content-Type: a...')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantcl
+2021/01/21 12:21:05 [error] 11#11: *2364 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 132. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\UnknownMethodException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\UnknownMethodException))
+#4 {main}
+Previous exception:
+yii\base\UnknownMethodException: Calling unknown method: app\models\Checklist::all() in /var/www/app/vendor/yiisoft/yii2/base/Component.php:301
+Stack trace:
+#0 /var/www/app/controllers/FrigateController.php(138): yii\base\Component->__call('all', Array)
+#1 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#2 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#3 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#5 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#7 /var/www/app/web/index.php(12): yii\base\Application->run()
+#8 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'dc3c87aa2a99',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OC
+2021/01/21 12:24:47 [error] 11#11: *2389 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 133. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Cannot modify header information - headers already sent by (output started at /var/www/app/controllers/FrigateController.php:133) in /var/www/app/controllers/FrigateController.php:148
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'Cannot modify h...', '/var/www/app/co...', 148, Array)
+#1 /var/www/app/controllers/FrigateController.php(148): header('Content-Type: a...')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantcl
+2021/01/21 12:25:25 [error] 11#11: *2403 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 133. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Cannot modify header information - headers already sent by (output started at /var/www/app/controllers/FrigateController.php:133) in /var/www/app/controllers/FrigateController.php:148
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'Cannot modify h...', '/var/www/app/co...', 148, Array)
+#1 /var/www/app/controllers/FrigateController.php(148): header('Content-Type: a...')
+#2 [internal function]: app\controllers\FrigateController->actionGetCsv()
+#3 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('get-csv', Array)
+#6 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/get-csv', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#8 /var/www/app/web/index.php(12): yii\base\Application->run()
+#9 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantcl
