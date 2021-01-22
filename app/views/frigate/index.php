@@ -110,8 +110,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <div class="offset-xl-4 offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
                     <!--Кнопка поиска-->
-                    <?php /*Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'href' => 'frigate/get-query'])*/ ?>
-                    <?= Html::a('Поиск', (new yii\web\UrlManager)->createUrl('frigate/get-csv'), ['data-method' => 'GET', 'class' => 'btn btn-primary']) ?>
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/index']), 'value' => 'button']) ?>
                     <!--Конец кнопки поиска-->
                 </div>
                 <div class="col-sm-2 col-xl-3 col-form-label">
@@ -125,11 +124,11 @@ $this->title = Yii::$app->name;
                         Дополнительные действия
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-
                         <?php /*Html::button('Экспортировать найденное в Excell', ['class' => 'btn btn-success', 'href' => 'frigate/get-csv'])*/ ?>
-                        <?php /*Html::submitInput('Экспортировать найденное в Excell', ['class' => 'btn btn-success', 'href' =>'frigate/get-csv'])*/ ?>
+                        <?= Html::submitButton('Экспортировать найденное в Excell', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/get-csv']), 'value' => 'button']) ?>
                         <!--<a class="dropdown-item badge-success" href="<?/*= yii\helpers\Url::to('frigate/get-csv') */?>">Экспортировать найденное в Excell</a>-->
-                        <?= Html::a('Экспортировать найденное в Excell', (new yii\web\UrlManager)->createUrl('frigate/get-csv'), ['data-method' => 'GET', 'class' => 'dropdown-item badge-success']) ?>
+                        <!--/*= Html::a('Экспортировать найденное в Excell', 'frigate/get-csv', ['data-method' => 'GET', 'class' => 'dropdown-item badge-success']) */-->
+
                         <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
                         <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
                         <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>

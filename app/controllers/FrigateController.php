@@ -59,11 +59,10 @@ class FrigateController extends Controller
 
     public function getQuery()
     {
-
         $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
         if (isset($_GET)){
             foreach ($_GET as $key => $value) {
-                if (!empty($value) && $key !== 'gridradio' && $key !== 'page') {
+                if (!empty($value) && $key !== 'gridradio' && $key !== 'page' && $key !== '_csrf' && $key !== 'search' && $key !== 'csv') {
                     if ($key !== 'datefrom' && $key !== 'dateto') {
                         $query->andWhere(['like', $key . '.name', $value]);
                     } elseif ($key == 'datefrom' || $key == 'dateto') {
@@ -91,7 +90,7 @@ class FrigateController extends Controller
         $query = $this->getQuery();
         $pages = $this->getPages($query);
         $mydata = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return [$mydata, $pages];
+        return [$mydata, $pages, $query];
     }
 
     public function actionIndex()
@@ -99,7 +98,8 @@ class FrigateController extends Controller
         $arr = $this->getData();
         $mydata = $arr[0];
         $pages = $arr[1];
-        return $this->render('index', compact('mydata', 'pages'));
+        $query = $arr[2];
+        return $this->render('index', compact('mydata', 'pages', 'query'));
     }
 
     public function actionAddrow()
@@ -130,14 +130,19 @@ class FrigateController extends Controller
 
     public function actionGetCsv()
     {
+
         var_dump($_GET);
-        $query = $this->getQuery()->all();
-        $titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
+        /*$titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
         $output = fopen('export-data.csv', 'a+w');
         fwrite($output,  iconv('UTF-8', 'Windows-1251',implode(';', $titles) . "\r\n"));
-        foreach ($query as $value) {
-            $arr = [
-                $value->smpName->name,
+        foreach ($_GET as $key => $value) {
+            $arr = [*/
+                /*$value->smpName->name,
+                $value->inspectionName->name,
+                Yii::$app->formatter->asDate($value->datefrom[0]),
+                Yii::$app->formatter->asDate($value->dateto[0]),
+                $value->duration,*/
+               /* $value->smpName->name,
                 $value->inspectionName->name,
                 Yii::$app->formatter->asDate($value->datefrom[0]),
                 Yii::$app->formatter->asDate($value->dateto[0]),
@@ -150,6 +155,6 @@ class FrigateController extends Controller
         header("Content-Disposition: attachment;filename=export-data.csv");
         readfile('export-data.csv');
         fclose($output);
-        unlink('export-data.csv');
+        unlink('export-data.csv');*/
     }
 }

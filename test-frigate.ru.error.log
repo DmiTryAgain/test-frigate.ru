@@ -387,3 +387,5 @@ Stack trace:
 $_SERVER = [
     'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
     'OCI_HOME' => '/opt/oracle/instantcl
+2021/01/22 07:49:54 [error] 12#12: *65 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Constant expression contains invalid operations in /var/www/app/controllers/FrigateController.php on line 97" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru"
+2021/01/22 07:50:09 [error] 12#12: *65 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Constant expression contains invalid operations in /var/www/app/controllers/FrigateController.php on line 97" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru"
