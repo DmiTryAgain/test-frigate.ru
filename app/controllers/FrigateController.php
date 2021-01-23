@@ -8,9 +8,6 @@ use app\models\Inspection;
 use app\models\Smp;
 use Yii;
 use yii\data\Pagination;
-use yii\db\ActiveRecord;
-use yii\db\Query;
-use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -29,7 +26,7 @@ class FrigateController extends Controller
 
     public function actionInspectionName($q = null)
     {
-        $data = Checklist::find()->select('inspection')->distinct()->orderBy('inspection')->all();
+        $data = Checklist::find()->select('inspection')->joinWith(['smpName', 'inspectionName'])->where(['ilike', 'inspection.name', $q])->distinct()->orderBy('inspection')->all();
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->inspectionName->name];
@@ -37,7 +34,7 @@ class FrigateController extends Controller
         return Json::encode($out);
     }
 
-    public function actionDateFrom($q = null)
+    public function actionDateFrom()
     {
         $data = Checklist::find()->select('datefrom')->distinct()->orderBy('datefrom')->all();
         $out = [];
@@ -47,7 +44,7 @@ class FrigateController extends Controller
         return Json::encode($out);
     }
 
-    public function actionDateTo($q = null)
+    public function actionDateTo()
     {
         $data = Checklist::find()->select('dateto')->distinct()->orderBy('dateto')->all();
         $out = [];
@@ -60,7 +57,7 @@ class FrigateController extends Controller
     public function getQuery()
     {
         $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
-        if (isset($_GET)){
+        if (isset($_GET)) {
             foreach ($_GET as $key => $value) {
                 if (!empty($value) && $key !== 'gridradio' && $key !== 'page' && $key !== '_csrf' && $key !== 'search' && $key !== 'csv' && $key !== 'r') {
                     if ($key !== 'datefrom' && $key !== 'dateto') {
@@ -103,8 +100,7 @@ class FrigateController extends Controller
 
     public function actionAddrow()
     {
-        $model = new Checklist();
-        return $this->render('addrow', compact('model'));
+        return $this->render('addrow');
     }
 
     public function actionInfo()
@@ -112,27 +108,54 @@ class FrigateController extends Controller
         return $this->render('info');
     }
 
-    /*public function actionSaveData()
+    public function actionSaveData()
     {
+        $checklist = new Checklist();
+        $smp = new Smp();
+        $inspection = new Inspection();
+        if (!empty($_GET['smp'] && $_GET['inspection'] && $_GET['datefrom'] && $_GET['dateto'] && $_GET['duration'])) {
+            $smpId = Smp::find()->where(['name' => $_GET['smp']])->one();
 
-            $query = new Checklist();
-            if (!empty($value)  && $key !== '_csrf'){
-                if ($key !== 'datefrom' && $key !== 'dateto'){
-                    $query->with(['smpName', 'inspectionName']);
-                } elseif ($key == 'datefrom'){
-                    $query->andWhere(['=', $key, '{'.Yii::$app->formatter->asDate($value, 'yyyy-MM-dd').'}']);
-                }
+            if (empty($smpId)) {
+                $smp->name = $_GET['smp'];
+                $smp->save();
+                $smpId = Smp::find()->where(['name' => $_GET['smp']])->one();
             }
+            $checklist->smp = $smpId->id;
 
-        return $query->orderBy(['datefrom' => SORT_ASC]);
-    }*/
+            $inspectionId = Inspection::find()->where(['name' => $_GET['inspection']])->one();
+            if (empty($inspectionId)) {
+                $inspection->name = $_GET['inspection'];
+                $inspection->save();
+                $inspectionId = Inspection::find()->where(['name' => $_GET['inspection']])->one();
+            }
+            $checklist->inspection = $inspectionId->id;
+
+            $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($_GET['datefrom'], 'yyyy-MM-dd') . "']::timestamp[]");
+
+            $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($_GET['dateto'], 'yyyy-MM-dd') . "']::timestamp[]");
+
+            $checklist->duration = $_GET['duration'];
+            var_dump($checklist->datefrom);
+
+            $checklist->save();
+
+            var_dump($checklist->errors);
+
+            return true;
+        } else {
+            return 'пустой гет';
+        }
+
+
+    }
 
     public function actionGetCsv()
     {
         $query = $this->getQuery()->all();
         $titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
         $output = fopen('export-data.csv', 'a+w');
-        fwrite($output,  iconv('UTF-8', 'Windows-1251',implode(';', $titles) . "\r\n"));
+        fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $titles) . "\r\n"));
         foreach ($query as $key => $value) {
             $arr = [
                 $value->smpName->name,
@@ -141,7 +164,7 @@ class FrigateController extends Controller
                 Yii::$app->formatter->asDate($value->dateto[0]),
                 $value->duration,
             ];
-            fwrite($output,  iconv('UTF-8', 'Windows-1251',implode(';', $arr) . "\r\n"));
+            fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $arr) . "\r\n"));
         }
         header("Content-Type: application/x-force-csv");
         header("Cache-Control: no-cache, must-revalidate");

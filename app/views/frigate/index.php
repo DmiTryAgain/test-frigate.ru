@@ -126,7 +126,6 @@ $this->title = Yii::$app->name;
                 </div>
                 <div class="col-sm-2 col-form-label">
                     <!--Кнопка с выпадающим списком-->
-
                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Дополнительные действия
@@ -135,7 +134,6 @@ $this->title = Yii::$app->name;
                         <a class="dropdown-item badge-success"
                            href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать
                             найденное в Excell</a>
-
                         <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
                         <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
                         <a class="dropdown-item badge-info"

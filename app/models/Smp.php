@@ -12,4 +12,11 @@ class Smp extends ActiveRecord
     {
         return 'smp';
     }
+    public function rules()
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'string', 'length' => [4, 24]],
+        ];
+    }
 }

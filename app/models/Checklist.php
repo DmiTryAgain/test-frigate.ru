@@ -8,7 +8,7 @@ class Checklist extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'checklist';
+        return '{{checklist}}';
     }
 
     public function getSmpName()
@@ -19,4 +19,14 @@ class Checklist extends ActiveRecord
     {
         return $this->hasOne(Inspection::class, ['id' => 'inspection']);
     }
+    public function rules()
+    {
+        return [
+            [['smp', 'inspection','dateto', 'datefrom', 'duration'], 'required'],
+            /*[['datefrom', 'dateto'], 'date', 'format' => '{yyyy-MM-dd}'],*/
+
+            ['duration', 'integer', 'min' => 0],
+        ];
+    }
+
 }

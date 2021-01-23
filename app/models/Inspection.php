@@ -12,4 +12,11 @@ class Inspection extends ActiveRecord
     {
         return 'inspection';
     }
+    public function rules()
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'string', 'length' => [4, 24]],
+        ];
+    }
 }

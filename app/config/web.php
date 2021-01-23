@@ -65,6 +65,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 'page/<page:\d+>' => '/frigate/index',
+                '/' => '/frigate/index',
             ],
         ],
 
