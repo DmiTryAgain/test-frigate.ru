@@ -17,7 +17,7 @@ $this->title = Yii::$app->name;
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
             <?php $form = ActiveForm::begin(
-                ['id' => 'search', 'method' => 'get']
+                ['id' => 'search', 'method' => 'get', 'action' => 'frigate/index']
             ); ?>
 
             <div class="row form-group row">
@@ -32,6 +32,8 @@ $this->title = Yii::$app->name;
                             [
                                 'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                 'display' => 'value',
+
+                                'prefetch' => Url::to(['frigate/index']),
                                 'remote' => [
                                     'url' => Url::to(['frigate/smp-name']) . '?q=%QUERY',
                                     'wildcard' => '%QUERY'
@@ -54,6 +56,7 @@ $this->title = Yii::$app->name;
                             [
                                 'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                 'display' => 'value',
+                                'prefetch' => Url::to(['frigate/index']),
                                 'remote' => [
                                     'url' => Url::to(['frigate/inspection-name']) . '?q=%QUERY',
                                     'wildcard' => '%QUERY'
@@ -76,6 +79,8 @@ $this->title = Yii::$app->name;
                             [
                                 'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                 'display' => 'value',
+
+                                'prefetch' => Url::to(['frigate/index']),
                                 'remote' => [
                                     'url' => Url::to(['frigate/date-from']) . '?q=%QUERY',
                                     'wildcard' => '%QUERY'
@@ -97,6 +102,8 @@ $this->title = Yii::$app->name;
                             [
                                 'datumTokenizer' => "Bloodhound.tokenizers.obj.whitespace('value')",
                                 'display' => 'value',
+
+                                'prefetch' => Url::to(['frigate/date-to']),
                                 'remote' => [
                                     'url' => Url::to(['frigate/date-to']) . '?q=%QUERY',
                                     'wildcard' => '%QUERY'
@@ -108,9 +115,10 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="row form-group row">
+
                 <div class="offset-xl-4 offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
                     <!--Кнопка поиска-->
-                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/index']), 'value' => 'button']) ?>
+                    <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/index']), 'value' => 'search']) ?>
                     <!--Конец кнопки поиска-->
                 </div>
                 <div class="col-sm-2 col-xl-3 col-form-label">
@@ -124,14 +132,14 @@ $this->title = Yii::$app->name;
                         Дополнительные действия
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <?php /*Html::button('Экспортировать найденное в Excell', ['class' => 'btn btn-success', 'href' => 'frigate/get-csv'])*/ ?>
-                        <?= Html::submitButton('Экспортировать найденное в Excell', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/get-csv']), 'value' => 'button']) ?>
-                        <!--<a class="dropdown-item badge-success" href="<?/*= yii\helpers\Url::to('frigate/get-csv') */?>">Экспортировать найденное в Excell</a>-->
-                        <!--/*= Html::a('Экспортировать найденное в Excell', 'frigate/get-csv', ['data-method' => 'GET', 'class' => 'dropdown-item badge-success']) */-->
+                        <a class="dropdown-item badge-success"
+                           href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать
+                            найденное в Excell</a>
 
                         <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
                         <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
-                        <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
+                        <a class="dropdown-item badge-info"
+                           href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
                     </div>
                 </div>
             </div>
@@ -145,9 +153,9 @@ $this->title = Yii::$app->name;
                 <div class="col-md-10">
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
                         <?php
-                            if (!empty($mydata)){
+                        if (!empty($mydata)){
 
-                            ?>
+                        ?>
                         <tr class="table-primary">
                             <th scope="col" rowspan="2">Отметить выбор</th>
                             <th scope="col" rowspan="2">Проверяемый СМП</th>
@@ -161,30 +169,30 @@ $this->title = Yii::$app->name;
                         </tr>
                         <tbody>
 
+                        <?php
+
+                        foreach ($mydata as $data): ?>
+                            <tr>
+                                <th scope="row">
+                                    <?= Html::radio('gridradio', false, ['id' => 'gridRadio' . $data->id, 'value' => 'option' . $data->id]) ?>
+                                </th>
+                                <td><?= $data->smpName->name; ?></td>
+                                <td><?= $data->inspectionName->name; ?></td>
+                                <td><?= Yii::$app->formatter->asDate($data->datefrom[0]); ?></td>
+                                <td><?= Yii::$app->formatter->asDate($data->dateto[0]); ?></td>
+                                <td><?= $data->duration; ?></td>
+                            </tr>
+                        <?php endforeach;
+
+                        } else { ?>
+                            <h5 style="text-align: center">Ничего не найдено</h5>
                             <?php
-
-                            foreach ($mydata as $data): ?>
-                                <tr>
-                                    <th scope="row">
-                                        <?= Html::radio('gridradio', false, ['id' => 'gridRadio' . $data->id, 'value' => 'option' . $data->id]) ?>
-                                    </th>
-                                    <td><?= $data->smpName->name; ?></td>
-                                    <td><?= $data->inspectionName->name; ?></td>
-                                    <td><?= Yii::$app->formatter->asDate($data->datefrom[0]); ?></td>
-                                    <td><?= Yii::$app->formatter->asDate($data->dateto[0]); ?></td>
-                                    <td><?= $data->duration; ?></td>
-                                </tr>
-                            <?php endforeach;
-
-                            } else {?>
-                                <h5 style="text-align: center">Ничего не найдено</h5>
-                                <?php
-                            }?>
+                        } ?>
                         </tbody>
                     </table>
 
 
-                    <?=  yii\widgets\LinkPager::widget([
+                    <?= yii\widgets\LinkPager::widget([
                         'pagination' => $pages,
                         'maxButtonCount' => 7,
                         'firstPageLabel' => 'Начало',
