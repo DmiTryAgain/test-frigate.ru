@@ -389,3 +389,314 @@ $_SERVER = [
     'OCI_HOME' => '/opt/oracle/instantcl
 2021/01/22 07:49:54 [error] 12#12: *65 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Constant expression contains invalid operations in /var/www/app/controllers/FrigateController.php on line 97" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru"
 2021/01/22 07:50:09 [error] 12#12: *65 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Constant expression contains invalid operations in /var/www/app/controllers/FrigateController.php on line 97" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru"
+2021/01/24 10:37:21 [error] 10#10: *505 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 149. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 149. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.13',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    
+2021/01/24 10:37:21 [error] 10#10: *505 FastCGI sent in stderr: "'aead303e3abac23106529560547baebbedba0bb2943b91d5aa08fff1f41680f4',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_COOKIE' => '_csrf=7285fa8b52903b0c3906cca9e1bd9c304069b725289875f71afe718b8ab895f1a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22M5KNR-210IEN_wvEulGiq7ruaKkiScI_%22%3B%7D',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_DNT' => '1',
+    'HTTP_REFERER' => 'https://test-frigate.ru/frigate/addrow',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '61622',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/frigate/save-data?Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2+%D0%B8+%D0%9A%D0%BE%22&Inspection%5Bname%5D=%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80&Checklist%5Bdatefrom%5D=22.05.2020&Checklist%5Bdateto%5D=23.05.2020&Checklist%5Bduration%5D=1',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0
+2021/01/24 10:37:48 [error] 10#10: *507 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 148. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 148. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.13',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    
+2021/01/24 10:37:48 [error] 10#10: *507 FastCGI sent in stderr: "106529560547baebbedba0bb2943b91d5aa08fff1f41680f4',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_COOKIE' => '_csrf=7285fa8b52903b0c3906cca9e1bd9c304069b725289875f71afe718b8ab895f1a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22M5KNR-210IEN_wvEulGiq7ruaKkiScI_%22%3B%7D',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_DNT' => '1',
+    'HTTP_REFERER' => 'https://test-frigate.ru/frigate/addrow',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '61630',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/frigate/save-data?Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2+%D0%B8+%D0%9A%D0%BE%22&Inspection%5Bname%5D=%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80&Checklist%5Bdatefrom%5D=22.05.2020&Checklist%5Bdateto%5D=23.05.2020&Checklist%5Bduration%5D=1',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%
+2021/01/24 10:38:49 [error] 10#10: *509 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 148. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 148. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.13',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    
+2021/01/24 10:38:49 [error] 10#10: *509 FastCGI sent in stderr: "106529560547baebbedba0bb2943b91d5aa08fff1f41680f4',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_COOKIE' => '_csrf=7285fa8b52903b0c3906cca9e1bd9c304069b725289875f71afe718b8ab895f1a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22M5KNR-210IEN_wvEulGiq7ruaKkiScI_%22%3B%7D',
+    'HTTP_REFERER' => 'https://test-frigate.ru/frigate/addrow',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_DNT' => '1',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '61638',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/frigate/save-data?Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2+%D0%B8+%D0%9A%D0%BE%22&Inspection%5Bname%5D=%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80&Checklist%5Bdatefrom%5D=22.05.2020&Checklist%5Bdateto%5D=23.05.2020&Checklist%5Bduration%5D=1',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2+%D0%B8+%D0%9A%D0%BE%22&Inspection%5Bname%5D=%D0%A0%D
+2021/01/24 10:39:19 [error] 10#10: *513 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 144. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 144. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.13',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+    
+2021/01/24 10:39:19 [error] 10#10: *513 FastCGI sent in stderr: "ER_CERT_PATH' => '/certs/client',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'OCI_VERSION' => '12',
+    'FAKETIME' => '-0',
+    'DEBIAN_FRONTEND' => 'noninteractive',
+    'PUID' => '1000',
+    'DOCKER_TLS_CERTDIR' => '/certs',
+    'DOCKER_HOST' => 'tcp://docker-in-docker:2376',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c',
+    'OCI_INCLUDE_DIR' => '/opt/oracle/instantclient_12_1/sdk/include',
+    'LC_ALL' => 'POSIX',
+    'PWD' => '/var/www',
+    'PHP_SHA256' => 'aead303e3abac23106529560547baebbedba0bb2943b91d5aa08fff1f41680f4',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_COOKIE' => '_csrf=7285fa8b52903b0c3906cca9e1bd9c304069b725289875f71afe718b8ab895f1a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22M5KNR-210IEN_wvEulGiq7ruaKkiScI_%22%3B%7D',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_DNT' => '1',
+    'HTTP_REFERER' => 'https://test-frigate.ru/frigate/addrow',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '61654',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/
+2021/01/24 11:31:56 [error] 10#10: *654 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 139. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Object of class app\models\Smp could not be converted to int in /var/www/app/vendor/yiisoft/yii2/db/ColumnSchema.php:159
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/db/ColumnSchema.php(159): yii\base\ErrorHandler->handleError(8, 'Object of class...', '/var/www/app/ve...', 159, Array)
+#1 /var/www/app/vendor/yiisoft/yi" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/save-data?Smp[name]=%D0%9E%D0%9E%D0%9E+%22%D0%92%D0%B0%D1%81%D0%B8%D0%BB%D1%8C%D0%B5%D0%B2+%D0%B8+%D0%9A%D0%BE%22&Inspection[name]=%D0%A0%D0%BE%D1%81%D0%BF%D0%BE%D1%82%D1%80%D0%B5%D0%B1%D0%BD%D0%B0%D0%B4%D0%B7%D0%BE%D1%80&Checklist[datefrom]=22.05.2020&Checklist[dateto]=23.05.2020&Checklist[duration]=2 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru"
+2021/01/24 11:31:56 [error] 10#10: *654 FastCGI sent in stderr: "i2/db/pgsql/ColumnSchema.php(81): yii\db\ColumnSchema->typecast(Object(app\models\Smp))
+#2 /var/www/app/vendor/yiisoft/yii2/db/QueryBuilder.php(380): yii\db\pgsql\ColumnSchema->dbTypecast(Object(app\models\Smp))
+#3 /var/www/app/vendor/yiisoft/yii2/db/QueryBuilder.php(350): yii\db\QueryBuilder->prepareInsertValues('{{checklist}}', Array, Array)
+#4 /var/www/app/vendor/yiisoft/yii2/db/pgsql/QueryBuilder.php(305): yii\db\QueryBuilder->insert('{{checklist}}', Array, '<span class="st...')
+#5 /var/www/app/vendor/yiisoft/yii2/db/pgsql/Schema.php(628): yii\db\pgsql\QueryBuilder->insert('{{checklist}}', Array, '<span class="st...')
+#6 /var/www/app/vendor/yiisoft/yii2/db/ActiveRecord.php(600): yii\db\pgsql\Schema->insert('{{checklist}}', Array)
+#7 /var/www/app/vendor/yiisoft/yii2/db/ActiveRecord.php(566): yii\db\ActiveRecord->insertInternal(NULL)
+#8 /var/www/app/vendor/yiisoft/yii2/db/BaseActiveRecord.php(678): yii\db\ActiveRecord->insert(true, NULL)
+#9 /var/www/app/controllers/FrigateController.php(141): yii\db\BaseActiveRecord->save()
+#10 [internal function]: app\controllers\FrigateController->actionSaveData()
+#11 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#12 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#13 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('save-data', Array)
+#14 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/save-da...', Array)
+#15 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#16 /var/www/app/web/index.php(12): yii\base\Application->run()
+#17 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DI

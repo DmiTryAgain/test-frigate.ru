@@ -100,7 +100,10 @@ class FrigateController extends Controller
 
     public function actionAddrow()
     {
-        return $this->render('addrow');
+        $checklist = new Checklist();
+        $smp = new Smp();
+        $inspection = new Inspection();
+        return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
     }
 
     public function actionInfo()
@@ -113,41 +116,39 @@ class FrigateController extends Controller
         $checklist = new Checklist();
         $smp = new Smp();
         $inspection = new Inspection();
-        if (!empty($_GET['smp'] && $_GET['inspection'] && $_GET['datefrom'] && $_GET['dateto'] && $_GET['duration'])) {
-            $smpId = Smp::find()->where(['name' => $_GET['smp']])->one();
+        if ($smp->load(Yii::$app->request->get()) && $inspection->load(Yii::$app->request->get()) && $checklist->load(Yii::$app->request->get()) && $smp->validate() && $inspection->validate() && $checklist->validate()) {
+            $smpId = Smp::find()->where(['name' => $smp->name])->one();
 
             if (empty($smpId)) {
-                $smp->name = $_GET['smp'];
                 $smp->save();
-                $smpId = Smp::find()->where(['name' => $_GET['smp']])->one();
+                $smpId = Smp::find()->where(['name' => $smp->name])->one();
             }
             $checklist->smp = $smpId->id;
 
-            $inspectionId = Inspection::find()->where(['name' => $_GET['inspection']])->one();
+            $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
             if (empty($inspectionId)) {
-                $inspection->name = $_GET['inspection'];
                 $inspection->save();
-                $inspectionId = Inspection::find()->where(['name' => $_GET['inspection']])->one();
+                $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
             }
             $checklist->inspection = $inspectionId->id;
 
-            $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($_GET['datefrom'], 'yyyy-MM-dd') . "']::timestamp[]");
+            $datefrom = $checklist->datefrom;
 
-            $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($_GET['dateto'], 'yyyy-MM-dd') . "']::timestamp[]");
+            $dateto = $checklist->dateto;
 
-            $checklist->duration = $_GET['duration'];
-            var_dump($checklist->datefrom);
+            $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->datefrom, 'yyyy-MM-dd') . "']::timestamp[]");
 
-            $checklist->save();
+            $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->dateto, 'yyyy-MM-dd') . "']::timestamp[]");
 
-            var_dump($checklist->errors);
+            $checklist->save(false);
 
-            return true;
-        } else {
-            return 'пустой гет';
+            $checklist->datefrom = $datefrom;
+
+            $checklist->dateto = $dateto;
+
+            return $this->render('success');
         }
-
-
+        return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
     }
 
     public function actionGetCsv()

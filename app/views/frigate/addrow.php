@@ -11,7 +11,7 @@ use yii\helpers\Url;
 $this->title = Yii::$app->name;
 
 ?>
-<?php print_r($_POST) ?>
+<?php //var_dump($checklist->datefrom); ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
@@ -21,7 +21,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Выбор СМП</label>
                 <div class="col-md-6">
-                    <?= Typeahead::widget([
+                    <?= $form->field($smp, 'name')->widget(Typeahead::className(),[
                         'name' => 'smp',
                         'options' => ['placeholder' => 'Наименование СМП ...', 'value' => ''],
                         'scrollable' => true,
@@ -36,14 +36,14 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
             </div>
             <div class="row form-group row">
                 <label for="inputOrgan" class="col-md-4 col-form-label">Контролирующий орган</label>
                 <div class="col-md-6">
-                    <?= Typeahead::widget([
+                    <?= $form->field($inspection, 'name')->widget(Typeahead::className(),[
                         'name' => 'inspection',
                         'options' => ['placeholder' => 'Контролирующий орган ...'],
                         'scrollable' => true,
@@ -58,24 +58,24 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
             </div>
             <div class="row form-group row">
                 <label for="inputDateFrom" class="col-md-4 col-sm-4 col-form-label">Период проверки с</label>
                 <div class="col-md-2 col-sm-3">
-                    <input type="text" class="form-control" placeholder="" id="inputDuration" name="datefrom">
+                    <?= $form->field($checklist, 'datefrom')->input('text', ['placeholder' => "дд.мм.гггг"])->label(false) ?>
                 </div>
                 <label for="inputDateTo" class="col-md-2 col-sm-2 col-form-label" style="text-align: center">по</label>
                 <div class="col-md-2 col-sm-3">
-                    <input type="text" class="form-control" placeholder="" id="inputDuration" name="dateto">
+                    <?= $form->field($checklist, 'dateto')->input('text', ['placeholder' => "дд.мм.гггг"])->label(false) ?>
                 </div>
             </div>
             <div class="row form-group row">
                 <label for="inputDuration" class="col-md-4 col-form-label">Плановая длительность проверки</label>
                 <div class="col-md-6">
-                    <input type="number" class="form-control" placeholder="" id="inputDuration" name="duration">
+                    <?= $form->field($checklist, 'duration')->input('number')->label(false) ?>
                 </div>
             </div>
             <div class="row form-group row">
