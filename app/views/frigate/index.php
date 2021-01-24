@@ -130,10 +130,12 @@ $this->title = Yii::$app->name;
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item badge-success"
-                           href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать
-                            найденное в Excell</a>
-                        <a class="dropdown-item badge-danger" href="#">Удалить отмеченное</a>
-                        <a class="dropdown-item alert-secondary" href="#">Редактировать отмеченное</a>
+                           href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать найденное в Excell</a>
+
+                        <?= Html::input('submit', '','Удалить отмеченное' ,['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
+
+                        <a class="dropdown-item alert-secondary" href="<?= Url::to(['frigate/edit-data?' . Yii::$app->request->getQueryString()]) ?>">Редактировать отмеченное</a>
+
                         <a class="dropdown-item badge-info"
                            href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
                     </div>
@@ -143,10 +145,21 @@ $this->title = Yii::$app->name;
 
         </div>
     </div>
+    <?php
+        switch ($deleteMessage) {
+            case 'Успешно удалено!' : echo '<h5 style="text-align: center; background: lightgreen; padding: 15px;">' . $deleteMessage . '</h5>';
+            break;
+            case 'Выберете строку для удаления!' : echo '<h5 style="text-align: center; background: #ff9da4; padding: 15px;">' . $deleteMessage . '</h5>';
+            break;
+        }?>
     <div class="row">
+
         <div class="offset-md-1 offset-lg-2 col-md-11 col-lg-10">
             <div class="row">
+
                 <div class="col-md-10">
+
+
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
                         <?php
                         if (!empty($mydata)){
@@ -170,7 +183,9 @@ $this->title = Yii::$app->name;
                         foreach ($mydata as $data): ?>
                             <tr>
                                 <th scope="row">
-                                    <?= Html::radio('gridradio', false, ['id' => 'gridRadio' . $data->id, 'value' => 'option' . $data->id]) ?>
+                                    <?= $form->field($checklist, 'id')->input('radio' ,['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
+                                    <!--<?php //Html::radio('gridradio', false, ['id' =>  $data->id, 'value' => $data->id]) ?>-->
+
                                 </th>
                                 <td><?= $data->smpName->name; ?></td>
                                 <td><?= $data->inspectionName->name; ?></td>

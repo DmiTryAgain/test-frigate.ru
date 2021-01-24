@@ -700,3 +700,77 @@ $_SERVER = [
     'OCI_HOME' => '/opt/oracle/instantclient_12_1',
     'HOSTNAME' => 'd57eccbabfad',
     'PHP_INI_DI
+2021/01/24 19:55:29 [error] 10#10: *3090 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 162. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 162. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => 'd57eccbabfad',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.13',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/24 19:55:29 [error] 10#10: *3090 FastCGI sent in stderr: "0547baebbedba0bb2943b91d5aa08fff1f41680f4',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_COOKIE' => '_csrf=7285fa8b52903b0c3906cca9e1bd9c304069b725289875f71afe718b8ab895f1a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22M5KNR-210IEN_wvEulGiq7ruaKkiScI_%22%3B%7D',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_DNT' => '1',
+    'HTTP_REFERER' => 'https://test-frigate.ru/',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_ACCEPT_LANGUAGE' => 'en-US,en;q=0.5',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:84.0) Gecko/20100101 Firefox/84.0',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '61626',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/frigate/delete-row?smp=&inspection=&datefrom=&dateto=&Checklist%5Bid%5D=112',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'smp=&inspection=&datefrom=&dateto=&Checklist%5Bid%5D=112',
+    'SCRIPT_FILENAME' => '/var/www/app/web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611518129.270149,
+    'REQUEST_TIME' => 1611518129,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "

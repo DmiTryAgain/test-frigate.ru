@@ -59,7 +59,7 @@ class FrigateController extends Controller
         $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
         if (isset($_GET)) {
             foreach ($_GET as $key => $value) {
-                if (!empty($value) && $key !== 'gridradio' && $key !== 'page' && $key !== '_csrf' && $key !== 'search' && $key !== 'csv' && $key !== 'r') {
+                if (!empty($value) && $key !== 'Checklist' && $key !== 'page' && $key !== '_csrf' && $key !== 'search' && $key !== 'csv' && $key !== 'r') {
                     if ($key !== 'datefrom' && $key !== 'dateto') {
                         $query->andWhere(['like', $key . '.name', $value]);
                     } elseif ($key == 'datefrom' || $key == 'dateto') {
@@ -90,12 +90,13 @@ class FrigateController extends Controller
         return [$mydata, $pages];
     }
 
-    public function actionIndex()
+    public function actionIndex($deleteMessage = null)
     {
+        $checklist = new Checklist();
         $arr = $this->getData();
         $mydata = $arr[0];
         $pages = $arr[1];
-        return $this->render('index', compact('mydata', 'pages'));
+        return $this->render('index', compact('mydata', 'pages', 'checklist', 'deleteMessage'));
     }
 
     public function actionAddrow()
@@ -149,6 +150,20 @@ class FrigateController extends Controller
             return $this->render('success');
         }
         return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
+    }
+
+    public function actionDeleteRow()
+    {
+        $checklist = new Checklist();
+        $deleteMessage = 'Выберете строку для удаления!';
+        if ($checklist->load(Yii::$app->request->get())){
+            $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
+            if($deleteRow){
+                $deleteRow->delete();
+                $deleteMessage = 'Успешно удалено!';
+            }
+        }
+        return $this->actionIndex($deleteMessage);
     }
 
     public function actionGetCsv()
