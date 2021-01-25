@@ -32,4 +32,6 @@ class Checklist extends ActiveRecord
         ];
     }
 
+
+
 }

@@ -76,16 +76,16 @@ class FrigateController extends Controller
     {
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
-        if (!empty(Yii::$app->request->get('Checklist')['smpName'])){
+        if (!empty(Yii::$app->request->get('Checklist')['smpName'])) {
             $checklist->andWhere(['ilike', 'smp.name', Yii::$app->request->get('Checklist')['smpName']])->distinct();
         }
-        if (!empty(Yii::$app->request->get('Checklist')['inspectionName'])){
+        if (!empty(Yii::$app->request->get('Checklist')['inspectionName'])) {
             $checklist->andWhere(['ilike', 'inspection.name', Yii::$app->request->get('Checklist')['inspectionName']])->distinct();
         }
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])){
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
         }
-        if (!empty(Yii::$app->request->get('Checklist')['dateto'])){
+        if (!empty(Yii::$app->request->get('Checklist')['dateto'])) {
             $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
         }
 
