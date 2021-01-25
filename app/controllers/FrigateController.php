@@ -17,6 +17,7 @@ class FrigateController extends Controller
     public function actionSmpName($q = null)
     {
         $data = Checklist::find()->select('smp')->joinWith(['smpName', 'inspectionName'])->where(['ilike', 'smp.name', $q])->distinct()->orderBy('smp')->all();
+        /*$data = Smp::find()->select('name')->where(['like', 'name', $q])->distinct()->orderBy('name')->all();*/
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->smpName->name];
@@ -54,7 +55,7 @@ class FrigateController extends Controller
         return Json::encode($out);
     }
 
-    public function getQuery()
+    /*public function getQuery()
     {
         $query = Checklist::find()->joinWith(['smpName', 'inspectionName']);
         if (isset($_GET)) {
@@ -69,6 +70,26 @@ class FrigateController extends Controller
             }
         }
         return $query->orderBy(['datefrom' => SORT_DESC]);
+    }*/
+
+    public function getQuery()
+    {
+        $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
+
+        if (!empty(Yii::$app->request->get('Checklist')['smpName'])){
+            $checklist->andWhere(['ilike', 'smp.name', Yii::$app->request->get('Checklist')['smpName']])->distinct();
+        }
+        if (!empty(Yii::$app->request->get('Checklist')['inspectionName'])){
+            $checklist->andWhere(['ilike', 'inspection.name', Yii::$app->request->get('Checklist')['inspectionName']])->distinct();
+        }
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])){
+            $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
+        }
+        if (!empty(Yii::$app->request->get('Checklist')['dateto'])){
+            $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
+        }
+
+        return $checklist->orderBy(['datefrom' => SORT_DESC]);
     }
 
     public function getPages($query)
@@ -156,9 +177,9 @@ class FrigateController extends Controller
     {
         $checklist = new Checklist();
         $deleteMessage = 'Выберете строку для удаления!';
-        if ($checklist->load(Yii::$app->request->get())){
+        if ($checklist->load(Yii::$app->request->get())) {
             $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
-            if($deleteRow){
+            if ($deleteRow) {
                 $deleteRow->delete();
                 $deleteMessage = 'Успешно удалено!';
             }

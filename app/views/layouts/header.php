@@ -8,7 +8,7 @@
             <li class="nav-item">
                 <h5>
                     <a href="<?= yii\helpers\Url::to('/') ?>"
-                       class="nav-link <?= Yii::$app->request->pathInfo == '/' || '/page' ? 'active' : ''; ?>">
+                       class="nav-link <?= Yii::$app->request->pathInfo == '' || preg_match_all('/page\/[0-9]/ ', Yii::$app->request->pathInfo) > 0 ? 'active' : ''; ?>">
                         <i class="fas fa-clipboard-list fa-lg" style="margin-right: 7px;">
                         </i>Перечень плановых проверок
                     </a>
@@ -18,7 +18,7 @@
                 <h5>
                     <a href="<?= yii\helpers\Url::to('frigate/addrow') ?>"
                        class="nav-link  <?= Yii::$app->request->pathInfo == 'frigate/addrow' ? 'active' : ''; ?>">
-                        <i class="fas fa-plus fa-lg" style="margin-right: 5px;"></i>Добавление проверки
+                        <i class="fas fa-plus fa-lg" style="margin-right: 7px;"></i>Добавление проверки
                     </a>
                 </h5>
             </li>
@@ -26,7 +26,7 @@
                 <h5>
                     <a href="<?= yii\helpers\Url::to('frigate/info') ?>"
                        class="nav-link <?= Yii::$app->request->pathInfo == 'frigate/info' ? 'active' : ''; ?>">
-                        <i class="fas fa-info fa-lg" style="margin-right: 5px;"></i>Справка
+                        <i class="fas fa-info fa-lg" style="margin-right: 7px;"></i>Справка
                     </a>
                 </h5>
             </li>

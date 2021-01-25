@@ -774,3 +774,117 @@ $_SERVER = [
     'REQUEST_TIME_FLOAT' => 1611518129.270149,
     'REQUEST_TIME' => 1611518129,
 ]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "
+2021/01/25 11:37:05 [error] 10#10: *3216 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 86. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\db\Exception))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\db\Exception))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Undefined offset: 1 in /var/www/app/vendor/yiisoft/yii2/db/Command.php:324
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/db/Command.php(324): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', '/var/www/app/ve...', 324, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/db/Command.php(265): yii\db\Command->bindPendingParams()
+#2 /var/www/app/vendor/yiisoft/yii2/db/Command.php(1160): yii\db\Command->prepare(true)
+#3 /var/www/app/vendor/yiisoft/yii2/db/Command.php(433): yii\db\Command->queryInternal('fetchColumn', 0)
+#4 /var/www/app/vendor/yiisoft/yii2/db/Query.php(494): yii\db\Command->queryScalar()
+#5 /var/www/app/vendor/yiisoft/yii2/db/ActiveQuery.php(352): yii\db\Query->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#6 /var/www/app/vendor/yiisoft/yii2/db/Query.php(366): yii\db\ActiveQuery->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#7 /var/www/app/controllers/FrigateController.php(93): yii\db\Query->count()
+#8 /var/www/app/controllers/FrigateController.php(104): app\controllers\FrigateController->getPages(Object(yii\db\ActiveQuery))
+#9 /var/www/app/controllers/FrigateController.php(114): app\controllers\FrigateController->getData()
+#10 [internal function]: app\controllers\FrigateController->actionIndex(NULL)
+#11 /var/www/app/vendor/yiisoft/y
+2021/01/25 11:37:05 [error] 10#10: *3216 FastCGI sent in stderr: " '56978',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto=',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto='," while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto= HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/?Smp%5Bname%5D=%D0%BF%D0%B0%D0%BE+%D0%BC%D1%82%D1%81&Inspection%5Bname%5D=&datefrom=&dateto="
+2021/01/25 11:39:34 [error] 10#10: *3224 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 86. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\db\Exception))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\db\Exception))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Undefined offset: 1 in /var/www/app/vendor/yiisoft/yii2/db/Command.php:324
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/db/Command.php(324): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', '/var/www/app/ve...', 324, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/db/Command.php(265): yii\db\Command->bindPendingParams()
+#2 /var/www/app/vendor/yiisoft/yii2/db/Command.php(1160): yii\db\Command->prepare(true)
+#3 /var/www/app/vendor/yiisoft/yii2/db/Command.php(433): yii\db\Command->queryInternal('fetchColumn', 0)
+#4 /var/www/app/vendor/yiisoft/yii2/db/Query.php(494): yii\db\Command->queryScalar()
+#5 /var/www/app/vendor/yiisoft/yii2/db/ActiveQuery.php(352): yii\db\Query->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#6 /var/www/app/vendor/yiisoft/yii2/db/Query.php(366): yii\db\ActiveQuery->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#7 /var/www/app/controllers/FrigateController.php(93): yii\db\Query->count()
+#8 /var/www/app/controllers/FrigateController.php(104): app\controllers\FrigateController->getPages(Object(yii\db\ActiveQuery))
+#9 /var/www/app/controllers/FrigateController.php(114): app\controllers\FrigateController->getData()
+#10 [internal function]: app\controllers\FrigateController->actionIndex(NULL)
+#11 /var/www/app/vendor/yiisoft/y
+2021/01/25 11:39:34 [error] 10#10: *3224 FastCGI sent in stderr: " '57010',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto=',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto='," while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto= HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/?Smp%5Bname%5D=%D0%BF%D0%B0%D0%BE+%D0%BC%D1%82%D1%81&Inspection%5Bname%5D=&datefrom=&dateto="
+2021/01/25 11:45:09 [error] 10#10: *3236 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 86. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\db\Exception))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\db\Exception))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: Undefined offset: 1 in /var/www/app/vendor/yiisoft/yii2/db/Command.php:324
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/db/Command.php(324): yii\base\ErrorHandler->handleError(8, 'Undefined offse...', '/var/www/app/ve...', 324, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/db/Command.php(265): yii\db\Command->bindPendingParams()
+#2 /var/www/app/vendor/yiisoft/yii2/db/Command.php(1160): yii\db\Command->prepare(true)
+#3 /var/www/app/vendor/yiisoft/yii2/db/Command.php(433): yii\db\Command->queryInternal('fetchColumn', 0)
+#4 /var/www/app/vendor/yiisoft/yii2/db/Query.php(494): yii\db\Command->queryScalar()
+#5 /var/www/app/vendor/yiisoft/yii2/db/ActiveQuery.php(352): yii\db\Query->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#6 /var/www/app/vendor/yiisoft/yii2/db/Query.php(366): yii\db\ActiveQuery->queryScalar('COUNT(*)', Object(yii\db\Connection))
+#7 /var/www/app/controllers/FrigateController.php(93): yii\db\Query->count()
+#8 /var/www/app/controllers/FrigateController.php(104): app\controllers\FrigateController->getPages(Object(yii\db\ActiveQuery))
+#9 /var/www/app/controllers/FrigateController.php(114): app\controllers\FrigateController->getData()
+#10 [internal function]: app\controllers\FrigateController->actionIndex(NULL)
+#11 /var/www/app/vendor/yiisoft/y
+2021/01/25 11:45:09 [error] 10#10: *3236 FastCGI sent in stderr: " '57058',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto=',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto='," while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto= HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/?Smp%5Bname%5D=%D0%BF%D0%B0%D0%BE+%D0%BC%D1%82%D1%81&Inspection%5Bname%5D=&datefrom=&dateto="

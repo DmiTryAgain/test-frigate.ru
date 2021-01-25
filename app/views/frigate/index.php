@@ -21,7 +21,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Наименование СМП</label>
                 <div class="col-md-6">
-                    <?= Typeahead::widget([
+                    <?= $form->field($checklist, 'smpName')->widget(Typeahead::className(),[
                         'name' => 'smp',
                         'options' => ['placeholder' => 'Наименование СМП ...'],
                         'scrollable' => true,
@@ -38,14 +38,14 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
             </div>
             <div class="row form-group row">
                 <label for="inspection" class="col-md-4 col-form-label">Контролирующий орган</label>
                 <div class="col-md-6">
-                    <?= Typeahead::widget([
+                    <?= $form->field($checklist, 'inspectionName')->widget(Typeahead::className(),[
                         'name' => 'inspection',
                         'options' => ['placeholder' => 'Контролирующий орган ...'],
                         'scrollable' => true,
@@ -61,14 +61,14 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
             </div>
             <div class="row form-group row">
                 <label for="datefrom" class="col-md-4 col-sm-4 col-form-label">Период проверки с</label>
                 <div class="col-md-2 col-sm-3">
-                    <?= Typeahead::widget([
+                    <?= $form->field($checklist, 'datefrom')->widget(Typeahead::className(),[
                         'name' => 'datefrom',
                         'options' => ['placeholder' => '...'],
                         'scrollable' => true,
@@ -85,13 +85,13 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
                 <label for="dateto" class="col-md-2 col-sm-2 col-form-label"
                        style="text-align: center">по</label>
                 <div class="col-md-2 col-sm-3">
-                    <?= Typeahead::widget([
+                    <?= $form->field($checklist, 'dateto')->widget(Typeahead::className(),[
                         'name' => 'dateto',
                         'options' => ['placeholder' => '...'],
                         'scrollable' => true,
@@ -108,7 +108,7 @@ $this->title = Yii::$app->name;
                                 ]
                             ]
                         ]
-                    ]);
+                    ])->label(false);
                     ?>
                 </div>
             </div>
@@ -183,7 +183,7 @@ $this->title = Yii::$app->name;
                         foreach ($mydata as $data): ?>
                             <tr>
                                 <th scope="row">
-                                    <?= $form->field($checklist, 'id')->input('radio' ,['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
+                                    <?= $form->field($checklist, 'id', ['addClass' => 'form'])->input('radio' ,['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
                                     <!--<?php //Html::radio('gridradio', false, ['id' =>  $data->id, 'value' => $data->id]) ?>-->
 
                                 </th>
