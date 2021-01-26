@@ -70,7 +70,7 @@ $this->title = Yii::$app->name;
                 <div class="col-md-2 col-sm-3">
                     <?= $form->field($checklist, 'datefrom')->widget(Typeahead::className(),[
                         'name' => 'datefrom',
-                        'options' => ['placeholder' => '...'],
+                        'options' => ['placeholder' => "дд.мм.гггг"],
                         'scrollable' => true,
                         'pluginOptions' => ['highlight' => true],
                         'dataset' => [
@@ -93,7 +93,7 @@ $this->title = Yii::$app->name;
                 <div class="col-md-2 col-sm-3">
                     <?= $form->field($checklist, 'dateto')->widget(Typeahead::className(),[
                         'name' => 'dateto',
-                        'options' => ['placeholder' => '...'],
+                        'options' => ['placeholder' => "дд.мм.гггг"],
                         'scrollable' => true,
                         'pluginOptions' => ['highlight' => true],
                         'dataset' => [
@@ -132,9 +132,9 @@ $this->title = Yii::$app->name;
                         <a class="dropdown-item badge-success"
                            href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать найденное в Excell</a>
 
-                        <?= Html::input('submit', '','Удалить отмеченное' ,['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
-
-                        <a class="dropdown-item alert-secondary" href="<?= Url::to(['frigate/edit-data?' . Yii::$app->request->getQueryString()]) ?>">Редактировать отмеченное</a>
+                        <?= Html::input('submit', '','Удалить отмеченное', ['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
+                        <?= Html::input('submit', '','Редактировать отмеченное',['class' => 'dropdown-item alert-secondary', 'formaction' => Url::to(['frigate/edit-data'])]) ?>
+                        <!--<a class="dropdown-item alert-secondary" href="<?/*= Url::to(['frigate/edit-data?' . Yii::$app->request->getQueryString()]) */?>">Редактировать отмеченное</a>-->
 
                         <a class="dropdown-item badge-info"
                            href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
@@ -184,8 +184,6 @@ $this->title = Yii::$app->name;
                             <tr>
                                 <th scope="row">
                                     <?= $form->field($checklist, 'id', ['addClass' => 'form'])->input('radio' ,['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
-                                    <!--<?php //Html::radio('gridradio', false, ['id' =>  $data->id, 'value' => $data->id]) ?>-->
-
                                 </th>
                                 <td><?= $data->smpName->name; ?></td>
                                 <td><?= $data->inspectionName->name; ?></td>

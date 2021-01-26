@@ -81,15 +81,12 @@ class FrigateController extends Controller
 
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
-
         if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'])) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
-
         }
         if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'])) {
             $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
         }
-
 
         if (!empty(Yii::$app->request->get('Checklist')['smpName'])) {
             $checklist->andWhere(['ilike', 'smp.name', Yii::$app->request->get('Checklist')['smpName']])->distinct();
@@ -118,7 +115,7 @@ class FrigateController extends Controller
         $query = $this->getQuery();
         $pages = $this->getPages($query);
         $mydata = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return [$mydata, $pages];
+        return [$mydata, $pages, $query];
     }
 
     public function actionIndex($deleteMessage = null)
@@ -141,6 +138,88 @@ class FrigateController extends Controller
     public function actionInfo()
     {
         return $this->render('info');
+    }
+
+    public function actionGetCsv()
+    {
+        $query = $this->getQuery()->all();
+        $titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
+        $output = fopen('export-data.csv', 'a+w');
+        fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $titles) . "\r\n"));
+        foreach ($query as $key => $value) {
+            $arr = [
+                $value->smpName->name,
+                $value->inspectionName->name,
+                Yii::$app->formatter->asDate($value->datefrom[0]),
+                Yii::$app->formatter->asDate($value->dateto[0]),
+                $value->duration,
+            ];
+            fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $arr) . "\r\n"));
+        }
+        header("Content-Type: application/x-force-csv");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Content-Disposition: attachment;filename=export-data.csv");
+        readfile('export-data.csv');
+        fclose($output);
+        unlink('export-data.csv');
+    }
+
+    public function actionDeleteRow()
+    {
+        $checklist = new Checklist();
+        $deleteMessage = 'Выберете строку для удаления!';
+        if ($checklist->load(Yii::$app->request->get())) {
+            $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
+            if ($deleteRow) {
+                $deleteRow->delete();
+                $deleteMessage = 'Успешно удалено!';
+            }
+        }
+        return $this->actionIndex($deleteMessage);
+    }
+
+    public function actionEditData()
+    {
+        $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
+        $checklist->datefrom = Yii::$app->formatter->asDate($checklist->datefrom[0]);
+        $checklist->dateto = Yii::$app->formatter->asDate($checklist->dateto[0]);
+        return $this->render('editrow', compact('checklist'));
+    }
+
+    public function actionSaveEditData()
+    {
+
+        $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
+
+        if ($checklist->load(Yii::$app->request->get()) && $checklist->validate()) {
+
+            $smp = new Smp();
+            $inspection = new Inspection();
+
+            $smpId = Smp::find()->where(['=', 'smp.name', Yii::$app->request->get('Smp')['name']])->one();
+            if (empty($smpId->id)) {
+                $smp->name = Yii::$app->request->get('Smp')['name'];
+                $smp->save();
+                $smpId = Smp::find()->where(['name' => Yii::$app->request->get('Smp')['name']])->one();
+            }
+            $checklist->smp = $smpId->id;
+
+            $inspectionId = Inspection::find()->where(['=', 'inspection.name', Yii::$app->request->get('Inspection')['name']])->one();
+            if (empty($inspectionId->id)) {
+                $inspection->name = Yii::$app->request->get('Smp')['name'];
+                $smp->save();
+                $inspectionId = Inspection::find()->where(['name' => Yii::$app->request->get('Inspection')['name']])->one();
+            }
+            $checklist->inspection = $inspectionId->id;
+
+            $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->datefrom, 'yyyy-MM-dd') . "']::timestamp[]");
+
+            $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->dateto, 'yyyy-MM-dd') . "']::timestamp[]");
+
+            $checklist->save(false);
+            return $this->render('successEdit');
+        }
+
     }
 
     public function actionSaveData()
@@ -189,43 +268,5 @@ class FrigateController extends Controller
             return $this->render('success');
         }
         return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
-    }
-
-    public function actionDeleteRow()
-    {
-        $checklist = new Checklist();
-        $deleteMessage = 'Выберете строку для удаления!';
-        if ($checklist->load(Yii::$app->request->get())) {
-            $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
-            if ($deleteRow) {
-                $deleteRow->delete();
-                $deleteMessage = 'Успешно удалено!';
-            }
-        }
-        return $this->actionIndex($deleteMessage);
-    }
-
-    public function actionGetCsv()
-    {
-        $query = $this->getQuery()->all();
-        $titles = ['Проверяемый СМП', 'Контролирующий орган', 'Период проверки с', 'Период проверки по', 'Плановая длительность'];
-        $output = fopen('export-data.csv', 'a+w');
-        fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $titles) . "\r\n"));
-        foreach ($query as $key => $value) {
-            $arr = [
-                $value->smpName->name,
-                $value->inspectionName->name,
-                Yii::$app->formatter->asDate($value->datefrom[0]),
-                Yii::$app->formatter->asDate($value->dateto[0]),
-                $value->duration,
-            ];
-            fwrite($output, iconv('UTF-8', 'Windows-1251', implode(';', $arr) . "\r\n"));
-        }
-        header("Content-Type: application/x-force-csv");
-        header("Cache-Control: no-cache, must-revalidate");
-        header("Content-Disposition: attachment;filename=export-data.csv");
-        readfile('export-data.csv');
-        fclose($output);
-        unlink('export-data.csv');
     }
 }

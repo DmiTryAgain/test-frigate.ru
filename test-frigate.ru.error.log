@@ -888,3 +888,572 @@ Stack trace:
     'CONTENT_TYPE' => '',
     'REQUEST_METHOD' => 'GET',
     'QUERY_STRING' => 'Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto='," while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /?Smp%5Bname%5D=%D0%9F%D0%90%D0%9E+%22%D0%9C%D0%A2%D0%A1%22&Inspection%5Bname%5D=&datefrom=&dateto= HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/?Smp%5Bname%5D=%D0%BF%D0%B0%D0%BE+%D0%BC%D1%82%D1%81&Inspection%5Bname%5D=&datefrom=&dateto="
+2021/01/26 11:33:01 [error] 10#10: *2674 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:33:01 [error] 10#10: *2674 FastCGI sent in stderr: "dd76ab53f28c698a1646fa2dde8547c3f45e02886',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_COOKIE' => '_csrf=65f526c78f2c93bf52bfe81ae8d85957a56e24036994fe49f0cb0c7768e7e208a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22UjjfNQApA81E4KplWD1MNAu6OtJOjWJ4%22%3B%7D',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://test-frigate.ru/',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH_USER' => '?1',
+    'HTTP_SEC_FETCH_MODE' => 'navigate',
+    'HTTP_SEC_FETCH_SITE' => 'same-origin',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '59540',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    'REQUEST_SCHEME' => 'https',
+    'SERVER_PROTOCOL' => 'HTTP/1.1',
+    'DOCUMENT_ROOT' => '/var/www/app/web',
+    'DOCUMENT_URI' => '/index.php',
+    'REQUEST_URI' => '/frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12',
+    'SCRIPT_NAME' => '/index.php',
+    'CONTENT_LENGTH' => '',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Checklist%5BsmpNam
+2021/01/26 11:34:21 [error] 10#10: *2678 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 184. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(Error))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(Error))
+#4 {main}
+Previous exception:
+Error: Call to a member function load() on array in /var/www/app/controllers/FrigateController.php:185
+Stack trace:
+#0 [internal function]: app\controllers\FrigateController->actionEditData()
+#1 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#3 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('edit-data', Array)
+#4 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/edit-da...', Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /var/www/app/web/index.php(12): yii\base\Application->run()
+#7 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' =
+2021/01/26 11:34:21 [error] 10#10: *2678 FastCGI sent in stderr: "r.xz.asc',
+    'PHP_URL' => 'https://www.php.net/distributions/php-7.4.14.tar.xz',
+    'DOCKER_CERT_PATH' => '/certs/client',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'OCI_VERSION' => '12',
+    'FAKETIME' => '-0',
+    'DEBIAN_FRONTEND' => 'noninteractive',
+    'PUID' => '1000',
+    'DOCKER_TLS_CERTDIR' => '/certs',
+    'DOCKER_HOST' => 'tcp://docker-in-docker:2376',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c',
+    'OCI_INCLUDE_DIR' => '/opt/oracle/instantclient_12_1/sdk/include',
+    'LC_ALL' => 'POSIX',
+    'PWD' => '/var/www',
+    'PHP_SHA256' => 'f9f3c37969fcd9006c1dbb1dd76ab53f28c698a1646fa2dde8547c3f45e02886',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_COOKIE' => '_csrf=65f526c78f2c93bf52bfe81ae8d85957a56e24036994fe49f0cb0c7768e7e208a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22UjjfNQApA81E4KplWD1MNAu6OtJOjWJ4%22%3B%7D',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://test-frigate.ru/',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH_USER' => '?1',
+    'HTTP_SEC_FETCH_MODE' => 'navigate',
+    'HTTP_SEC_FETCH_SITE' => 'same-origin',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+ 
+2021/01/26 11:34:39 [error] 10#10: *2682 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 184. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(Error))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(Error))
+#4 {main}
+Previous exception:
+Error: Call to a member function load() on array in /var/www/app/controllers/FrigateController.php:185
+Stack trace:
+#0 [internal function]: app\controllers\FrigateController->actionEditData()
+#1 /var/www/app/vendor/yiisoft/yii2/base/InlineAction.php(57): call_user_func_array(Array, Array)
+#2 /var/www/app/vendor/yiisoft/yii2/base/Controller.php(181): yii\base\InlineAction->runWithParams(Array)
+#3 /var/www/app/vendor/yiisoft/yii2/base/Module.php(534): yii\base\Controller->runAction('edit-data', Array)
+#4 /var/www/app/vendor/yiisoft/yii2/web/Application.php(104): yii\base\Module->runAction('frigate/edit-da...', Array)
+#5 /var/www/app/vendor/yiisoft/yii2/base/Application.php(392): yii\web\Application->handleRequest(Object(yii\web\Request))
+#6 /var/www/app/web/index.php(12): yii\base\Application->run()
+#7 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' =
+2021/01/26 11:34:39 [error] 10#10: *2682 FastCGI sent in stderr: "r.xz.asc',
+    'PHP_URL' => 'https://www.php.net/distributions/php-7.4.14.tar.xz',
+    'DOCKER_CERT_PATH' => '/certs/client',
+    'PATH' => '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+    'OCI_VERSION' => '12',
+    'FAKETIME' => '-0',
+    'DEBIAN_FRONTEND' => 'noninteractive',
+    'PUID' => '1000',
+    'DOCKER_TLS_CERTDIR' => '/certs',
+    'DOCKER_HOST' => 'tcp://docker-in-docker:2376',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c',
+    'OCI_INCLUDE_DIR' => '/opt/oracle/instantclient_12_1/sdk/include',
+    'LC_ALL' => 'POSIX',
+    'PWD' => '/var/www',
+    'PHP_SHA256' => 'f9f3c37969fcd9006c1dbb1dd76ab53f28c698a1646fa2dde8547c3f45e02886',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_COOKIE' => '_csrf=65f526c78f2c93bf52bfe81ae8d85957a56e24036994fe49f0cb0c7768e7e208a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22UjjfNQApA81E4KplWD1MNAu6OtJOjWJ4%22%3B%7D',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://test-frigate.ru/',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH_USER' => '?1',
+    'HTTP_SEC_FETCH_MODE' => 'navigate',
+    'HTTP_SEC_FETCH_SITE' => 'same-origin',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+ 
+2021/01/26 11:34:49 [error] 10#10: *2682 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:34:49 [error] 10#10: *2682 FastCGI sent in stderr: "> '/var/www/app/web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611660889.703757,
+    'REQUEST_TIME' => 1611660889,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/"
+2021/01/26 11:46:58 [error] 10#10: *2944 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:46:58 [error] 10#10: *2944 FastCGI sent in stderr: "ENAME' => '/var/www/app/web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611661618.609045,
+    'REQUEST_TIME' => 1611661618,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/"
+2021/01/26 11:47:51 [error] 10#10: *2948 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:47:51 [error] 10#10: *2948 FastCGI sent in stderr: "',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12',
+    'SCRIPT_FILENAME' => '/var/www/app/web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611661671.841645,
+    'REQUEST_TIME' => 1611661671,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/"
+2021/01/26 11:47:58 [error] 10#10: *2948 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 188. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 188. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:47:58 [error] 10#10: *2948 FastCGI sent in stderr: "web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611661678.604115,
+    'REQUEST_TIME' => 1611661678,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/"
+2021/01/26 11:58:29 [error] 10#10: *3095 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 189. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 11:58:29 [error] 10#10: *3095 FastCGI sent in stderr: "',
+    'CONTENT_TYPE' => '',
+    'REQUEST_METHOD' => 'GET',
+    'QUERY_STRING' => 'Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12',
+    'SCRIPT_FILENAME' => '/var/www/app/web/index.php',
+    'FCGI_ROLE' => 'RESPONDER',
+    'PHP_SELF' => '/index.php',
+    'REQUEST_TIME_FLOAT' => 1611662309.821067,
+    'REQUEST_TIME' => 1611662309,
+]" while reading upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET /frigate/edit-data?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=&Checklist%5Bdateto%5D=&Checklist%5Bid%5D=12 HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/"
+2021/01/26 12:24:44 [error] 10#10: *3405 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: mb_strlen() expects parameter 1 to be string, object given in /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php:390
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'mb_strlen() exp...', '/var/www/app/ve...', 390, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(390): mb_strlen(Object(yii\db\ArrayExpression), 'UTF-8')
+#2 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(363): yii\validators\DateValidator->parseDateValueIntl(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#3 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(343): yii\validators\DateValidator->parseDateValueFormat(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#4 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(292): yii\validators\DateValidator->parseDateValue(Object(yii\db\ArrayExpression))
+#5 /var/www/app/vendor/yiisoft/yii2/validators/Validator.php(261): yii\validators\DateValidator->validateAttribute(Object(app\models\Checklist), 'dateto')
+#6 /var/www/app/vendor/yiisoft/yii2/base/Model.php(368): yii\validators\Validator->validateAttributes(Object(app\models\Checklist), Array)
+#7 /var/www/app/vendor/yiisoft/yii2/db/ActiveRecord.php(670): yii\base\Model->validate(Array)
+#8 /var/www/a
+2021/01/26 12:26:29 [error] 10#10: *3419 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: mb_strlen() expects parameter 1 to be string, object given in /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php:390
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'mb_strlen() exp...', '/var/www/app/ve...', 390, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(390): mb_strlen(Object(yii\db\ArrayExpression), 'UTF-8')
+#2 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(363): yii\validators\DateValidator->parseDateValueIntl(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#3 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(343): yii\validators\DateValidator->parseDateValueFormat(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#4 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(292): yii\validators\DateValidator->parseDateValue(Object(yii\db\ArrayExpression))
+#5 /var/www/app/vendor/yiisoft/yii2/validators/Validator.php(261): yii\validators\DateValidator->validateAttribute(Object(app\models\Checklist), 'dateto')
+#6 /var/www/app/vendor/yiisoft/yii2/base/Model.php(368): yii\validators\Validator->validateAttributes(Object(app\models\Checklist), Array)
+#7 /var/www/app/vendor/yiisoft/yii2/db/ActiveRecord.php(670): yii\base\Model->validate(Array)
+#8 /var/www/a
+2021/01/26 12:27:38 [error] 10#10: *3424 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 186. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\base\ErrorException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\base\ErrorException))
+#4 {main}
+Previous exception:
+yii\base\ErrorException: mb_strlen() expects parameter 1 to be string, object given in /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php:390
+Stack trace:
+#0 [internal function]: yii\base\ErrorHandler->handleError(2, 'mb_strlen() exp...', '/var/www/app/ve...', 390, Array)
+#1 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(390): mb_strlen(Object(yii\db\ArrayExpression), 'UTF-8')
+#2 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(363): yii\validators\DateValidator->parseDateValueIntl(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#3 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(343): yii\validators\DateValidator->parseDateValueFormat(Object(yii\db\ArrayExpression), 'dd.MM.yyyy')
+#4 /var/www/app/vendor/yiisoft/yii2/validators/DateValidator.php(292): yii\validators\DateValidator->parseDateValue(Object(yii\db\ArrayExpression))
+#5 /var/www/app/vendor/yiisoft/yii2/validators/Validator.php(261): yii\validators\DateValidator->validateAttribute(Object(app\models\Checklist), 'dateto')
+#6 /var/www/app/vendor/yiisoft/yii2/base/Model.php(368): yii\validators\Validator->validateAttributes(Object(app\models\Checklist), Array)
+#7 /var/www/app/vendor/yiisoft/yii2/db/ActiveRecord.php(670): yii\base\Model->validate(Array)
+#8 /var/www/a
+2021/01/26 12:29:29 [error] 10#10: *3430 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 188. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 188. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
+2021/01/26 12:29:29 [error] 10#10: *3430 FastCGI sent in stderr: "    'OCI_VERSION' => '12',
+    'FAKETIME' => '-0',
+    'DEBIAN_FRONTEND' => 'noninteractive',
+    'PUID' => '1000',
+    'DOCKER_TLS_CERTDIR' => '/certs',
+    'DOCKER_HOST' => 'tcp://docker-in-docker:2376',
+    'PHPIZE_DEPS' => 'autoconf 		dpkg-dev 		file 		g++ 		gcc 		libc-dev 		make 		pkg-config 		re2c',
+    'OCI_INCLUDE_DIR' => '/opt/oracle/instantclient_12_1/sdk/include',
+    'LC_ALL' => 'POSIX',
+    'PWD' => '/var/www',
+    'PHP_SHA256' => 'f9f3c37969fcd9006c1dbb1dd76ab53f28c698a1646fa2dde8547c3f45e02886',
+    'DB_1_ENV_MYSQL_PASSWORD' => '',
+    'DB_1_ENV_MYSQL_USER' => '',
+    'DB_1_ENV_MYSQL_DATABASE' => '',
+    'USER' => 'www-data',
+    'HTTP_COOKIE' => '_csrf=65f526c78f2c93bf52bfe81ae8d85957a56e24036994fe49f0cb0c7768e7e208a%3A2%3A%7Bi%3A0%3Bs%3A5%3A%22_csrf%22%3Bi%3A1%3Bs%3A32%3A%22UjjfNQApA81E4KplWD1MNAu6OtJOjWJ4%22%3B%7D',
+    'HTTP_ACCEPT_LANGUAGE' => 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'HTTP_ACCEPT_ENCODING' => 'gzip, deflate, br',
+    'HTTP_REFERER' => 'https://test-frigate.ru/',
+    'HTTP_SEC_FETCH_DEST' => 'document',
+    'HTTP_SEC_FETCH_USER' => '?1',
+    'HTTP_SEC_FETCH_MODE' => 'navigate',
+    'HTTP_SEC_FETCH_SITE' => 'same-origin',
+    'HTTP_ACCEPT' => 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+    'HTTP_USER_AGENT' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36',
+    'HTTP_UPGRADE_INSECURE_REQUESTS' => '1',
+    'HTTP_CACHE_CONTROL' => 'no-cache',
+    'HTTP_PRAGMA' => 'no-cache',
+    'HTTP_CONNECTION' => 'keep-alive',
+    'HTTP_HOST' => 'test-frigate.ru',
+    'REDIRECT_STATUS' => '200',
+    'SERVER_NAME' => 'test-frigate.ru',
+    'SERVER_PORT' => '443',
+    'SERVER_ADDR' => '172.19.0.6',
+    'REMOTE_PORT' => '62600',
+    'REMOTE_ADDR' => '172.19.0.1',
+    'SERVER_SOFTWARE' => 'nginx/1.19.6',
+    'GATEWAY_INTERFACE' => 'CGI/1.1',
+    'HTTPS' => 'on',
+    '
+2021/01/26 13:10:54 [error] 10#10: *4019 FastCGI sent in stderr: "PHP message: An Error occurred while handling another error:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 195. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/web/ErrorHandler.php(136): yii\web\Response->send()
+#2 /var/www/app/vendor/yiisoft/yii2/base/ErrorHandler.php(135): yii\web\ErrorHandler->renderException(Object(yii\web\HeadersAlreadySentException))
+#3 [internal function]: yii\base\ErrorHandler->handleException(Object(yii\web\HeadersAlreadySentException))
+#4 {main}
+Previous exception:
+yii\web\HeadersAlreadySentException: Headers already sent in /var/www/app/controllers/FrigateController.php on line 195. in /var/www/app/vendor/yiisoft/yii2/web/Response.php:373
+Stack trace:
+#0 /var/www/app/vendor/yiisoft/yii2/web/Response.php(346): yii\web\Response->sendHeaders()
+#1 /var/www/app/vendor/yiisoft/yii2/base/Application.php(398): yii\web\Response->send()
+#2 /var/www/app/web/index.php(12): yii\base\Application->run()
+#3 {main}
+$_SERVER = [
+    'PHP_EXTRA_CONFIGURE_ARGS' => '--enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --disable-cgi',
+    'OCI_HOME' => '/opt/oracle/instantclient_12_1',
+    'HOSTNAME' => '379ac22e4312',
+    'PHP_INI_DIR' => '/usr/local/etc/php',
+    'LD_LIBRARY_PATH' => '/opt/oracle/instantclient_12_1',
+    'OCI_LIB_DIR' => '/opt/oracle/instantclient_12_1',
+    'HOME' => '/var/www',
+    'LARADOCK_PHALCON_VERSION' => '4.0.5',
+    'PHP_IDE_CONFIG' => 'serverName=laradock',
+    'PHP_LDFLAGS' => '-Wl,-O1 -pie',
+    'PHP_CFLAGS' => '-fstack-protector-strong -fpic -fpie -O2 -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64',
+    'DOCKER_TLS_VERIFY' => '1',
+    'PHP_VERSION' => '7.4.14',
+    'PGID' => '1000',
+    'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
+   
