@@ -9,7 +9,9 @@ use app\models\Smp;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\Json;
+use yii\validators\DateValidator;
 use yii\web\Controller;
+use yii\validators\Validator;
 
 class FrigateController extends Controller
 {
@@ -74,7 +76,20 @@ class FrigateController extends Controller
 
     public function getQuery()
     {
+
+        $validator = new DateValidator();
+
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
+
+
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'])) {
+            $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
+
+        }
+        if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'])) {
+            $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
+        }
+
 
         if (!empty(Yii::$app->request->get('Checklist')['smpName'])) {
             $checklist->andWhere(['ilike', 'smp.name', Yii::$app->request->get('Checklist')['smpName']])->distinct();
@@ -82,14 +97,9 @@ class FrigateController extends Controller
         if (!empty(Yii::$app->request->get('Checklist')['inspectionName'])) {
             $checklist->andWhere(['ilike', 'inspection.name', Yii::$app->request->get('Checklist')['inspectionName']])->distinct();
         }
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])) {
-            $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
-        }
-        if (!empty(Yii::$app->request->get('Checklist')['dateto'])) {
-            $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
-        }
 
         return $checklist->orderBy(['datefrom' => SORT_DESC]);
+
     }
 
     public function getPages($query)
@@ -138,7 +148,15 @@ class FrigateController extends Controller
         $checklist = new Checklist();
         $smp = new Smp();
         $inspection = new Inspection();
-        if ($smp->load(Yii::$app->request->get()) && $inspection->load(Yii::$app->request->get()) && $checklist->load(Yii::$app->request->get()) && $smp->validate() && $inspection->validate() && $checklist->validate()) {
+
+        if (
+            $smp->load(Yii::$app->request->get()) &&
+            $inspection->load(Yii::$app->request->get()) &&
+            $checklist->load(Yii::$app->request->get()) &&
+            $smp->validate() &&
+            $inspection->validate() &&
+            $checklist->validate()
+        ) {
             $smpId = Smp::find()->where(['name' => $smp->name])->one();
 
             if (empty($smpId)) {

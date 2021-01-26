@@ -5,7 +5,7 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
-class Checklist extends ActiveRecord
+class  Checklist extends ActiveRecord
 {
     public static function tableName()
     {
