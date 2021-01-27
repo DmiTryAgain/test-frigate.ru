@@ -81,10 +81,11 @@ class FrigateController extends Controller
 
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'])) {
+        $error = 'Введён некорректный формат даты';
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'],$error)) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
         }
-        if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'])) {
+        if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'], $error)) {
             $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
         }
 
@@ -94,16 +95,15 @@ class FrigateController extends Controller
         if (!empty(Yii::$app->request->get('Checklist')['inspectionName'])) {
             $checklist->andWhere(['ilike', 'inspection.name', Yii::$app->request->get('Checklist')['inspectionName']])->distinct();
         }
-
-        return $checklist->orderBy(['datefrom' => SORT_DESC]);
+        return $checklist->orderBy(['smp' => SORT_DESC]);
 
     }
 
-    public function getPages($query)
+    public function getPages($checklist)
     {
         $pages = new Pagination([
-            'totalCount' => $query->count(),
-            'pageSize' => 2,
+            'totalCount' => $checklist->count(),
+            'pageSize' => 5,
             'forcePageParam' => false,
             'pageSizeParam' => false,
         ]);
@@ -112,10 +112,10 @@ class FrigateController extends Controller
 
     public function getData()
     {
-        $query = $this->getQuery();
-        $pages = $this->getPages($query);
-        $mydata = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return [$mydata, $pages, $query];
+        $checklist = $this->getQuery();
+        $pages = $this->getPages($checklist);
+        $mydata = $checklist->offset($pages->offset)->limit($pages->limit)->all();
+        return [$mydata, $pages, $checklist];
     }
 
     public function actionIndex($deleteMessage = null)
@@ -168,7 +168,7 @@ class FrigateController extends Controller
     {
         $checklist = new Checklist();
         $deleteMessage = 'Выберете строку для удаления!';
-        if ($checklist->load(Yii::$app->request->get())) {
+        if (!empty(Yii::$app->request->get('Checklist')['id'])) {
             $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
             if ($deleteRow) {
                 $deleteRow->delete();
@@ -180,19 +180,22 @@ class FrigateController extends Controller
 
     public function actionEditData()
     {
-        $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
-        $checklist->datefrom = Yii::$app->formatter->asDate($checklist->datefrom[0]);
-        $checklist->dateto = Yii::$app->formatter->asDate($checklist->dateto[0]);
-        return $this->render('editrow', compact('checklist'));
+
+        if (!empty(Yii::$app->request->get('Checklist')['id'])){
+            $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
+            $checklist->datefrom = Yii::$app->formatter->asDate($checklist->datefrom[0]);
+            $checklist->dateto = Yii::$app->formatter->asDate($checklist->dateto[0]);
+            return $this->render('editrow', compact('checklist'));
+        } else {
+            $deleteMessage = 'Выберете строку для редактирования!';
+            return $this->actionIndex($deleteMessage);
+        }
     }
 
     public function actionSaveEditData()
     {
-
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
-
         if ($checklist->load(Yii::$app->request->get()) && $checklist->validate()) {
-
             $smp = new Smp();
             $inspection = new Inspection();
 
@@ -206,8 +209,8 @@ class FrigateController extends Controller
 
             $inspectionId = Inspection::find()->where(['=', 'inspection.name', Yii::$app->request->get('Inspection')['name']])->one();
             if (empty($inspectionId->id)) {
-                $inspection->name = Yii::$app->request->get('Smp')['name'];
-                $smp->save();
+                $inspection->name = Yii::$app->request->get('Inspection')['name'];
+                $inspection->save();
                 $inspectionId = Inspection::find()->where(['name' => Yii::$app->request->get('Inspection')['name']])->one();
             }
             $checklist->inspection = $inspectionId->id;
@@ -219,7 +222,7 @@ class FrigateController extends Controller
             $checklist->save(false);
             return $this->render('successEdit');
         }
-
+        return $this->render('editrow', compact('checklist'));
     }
 
     public function actionSaveData()
@@ -269,4 +272,10 @@ class FrigateController extends Controller
         }
         return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
     }
+
+    public function actionImportCsv()
+    {
+
+    }
+
 }

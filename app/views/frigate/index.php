@@ -21,7 +21,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Наименование СМП</label>
                 <div class="col-md-6">
-                    <?= $form->field($checklist, 'smpName')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist, 'smpName')->widget(Typeahead::className(), [
                         'name' => 'smp',
                         'options' => ['placeholder' => 'Наименование СМП ...'],
                         'scrollable' => true,
@@ -45,7 +45,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="inspection" class="col-md-4 col-form-label">Контролирующий орган</label>
                 <div class="col-md-6">
-                    <?= $form->field($checklist, 'inspectionName')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist, 'inspectionName')->widget(Typeahead::className(), [
                         'name' => 'inspection',
                         'options' => ['placeholder' => 'Контролирующий орган ...'],
                         'scrollable' => true,
@@ -68,7 +68,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="datefrom" class="col-md-4 col-sm-4 col-form-label">Период проверки с</label>
                 <div class="col-md-2 col-sm-3">
-                    <?= $form->field($checklist, 'datefrom')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist, 'datefrom')->widget(Typeahead::className(), [
                         'name' => 'datefrom',
                         'options' => ['placeholder' => "дд.мм.гггг"],
                         'scrollable' => true,
@@ -91,7 +91,7 @@ $this->title = Yii::$app->name;
                 <label for="dateto" class="col-md-2 col-sm-2 col-form-label"
                        style="text-align: center">по</label>
                 <div class="col-md-2 col-sm-3">
-                    <?= $form->field($checklist, 'dateto')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist, 'dateto')->widget(Typeahead::className(), [
                         'name' => 'dateto',
                         'options' => ['placeholder' => "дд.мм.гггг"],
                         'scrollable' => true,
@@ -129,15 +129,10 @@ $this->title = Yii::$app->name;
                         Дополнительные действия
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item badge-success"
-                           href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать найденное в Excell</a>
-
-                        <?= Html::input('submit', '','Удалить отмеченное', ['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
-                        <?= Html::input('submit', '','Редактировать отмеченное',['class' => 'dropdown-item alert-secondary', 'formaction' => Url::to(['frigate/edit-data'])]) ?>
-                        <!--<a class="dropdown-item alert-secondary" href="<?/*= Url::to(['frigate/edit-data?' . Yii::$app->request->getQueryString()]) */?>">Редактировать отмеченное</a>-->
-
-                        <a class="dropdown-item badge-info"
-                           href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
+                        <a class="dropdown-item badge-success" href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать найденное в Excell</a>
+                        <?= Html::input('submit', '', 'Удалить отмеченное', ['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
+                        <?= Html::input('submit', '', 'Редактировать отмеченное', ['class' => 'dropdown-item alert-secondary', 'formaction' => Url::to(['frigate/edit-data'])]) ?>
+                        <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
                     </div>
                 </div>
             </div>
@@ -145,21 +140,20 @@ $this->title = Yii::$app->name;
 
         </div>
     </div>
-    <?php
-        switch ($deleteMessage) {
-            case 'Успешно удалено!' : echo '<h5 style="text-align: center; background: lightgreen; padding: 15px;">' . $deleteMessage . '</h5>';
-            break;
-            case 'Выберете строку для удаления!' : echo '<h5 style="text-align: center; background: #ff9da4; padding: 15px;">' . $deleteMessage . '</h5>';
-            break;
-        }?>
     <div class="row">
-
         <div class="offset-md-1 offset-lg-2 col-md-11 col-lg-10">
             <div class="row">
-
                 <div class="col-md-10">
-
-
+                    <h5 style="text-align: center; background: <?php
+                    switch ($deleteMessage) {
+                        case 'Успешно удалено!' :
+                            echo 'lightgreen';
+                            break;
+                        case 'Выберете строку для удаления!' || 'Выберете строку для редактирования!' :
+                            echo '#ff9da4';
+                            break;
+                    }
+                    ?>; padding: 15px;"><?= $deleteMessage ?></h5>
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
                         <?php
                         if (!empty($mydata)){
@@ -177,13 +171,11 @@ $this->title = Yii::$app->name;
                             <th scope="col">По</th>
                         </tr>
                         <tbody>
-
                         <?php
-
                         foreach ($mydata as $data): ?>
                             <tr>
                                 <th scope="row">
-                                    <?= $form->field($checklist, 'id', ['addClass' => 'form'])->input('radio' ,['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
+                                    <?= $form->field($checklist, 'id', ['addClass' => 'form'])->input('radio', ['id' => $data->id, 'value' => $data->id, 'name' => $checklist['id']])->label(false) ?>
                                 </th>
                                 <td><?= $data->smpName->name; ?></td>
                                 <td><?= $data->inspectionName->name; ?></td>
@@ -199,8 +191,6 @@ $this->title = Yii::$app->name;
                         } ?>
                         </tbody>
                     </table>
-
-
                     <?= yii\widgets\LinkPager::widget([
                         'pagination' => $pages,
                         'maxButtonCount' => 7,
