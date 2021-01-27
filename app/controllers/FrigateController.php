@@ -6,12 +6,14 @@ namespace app\controllers;
 use app\models\Checklist;
 use app\models\Inspection;
 use app\models\Smp;
+use app\models\UploadForm;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\Json;
 use yii\validators\DateValidator;
 use yii\web\Controller;
 use yii\validators\Validator;
+use yii\web\UploadedFile;
 
 class FrigateController extends Controller
 {
@@ -19,7 +21,6 @@ class FrigateController extends Controller
     public function actionSmpName($q = null)
     {
         $data = Checklist::find()->select('smp')->joinWith(['smpName', 'inspectionName'])->where(['ilike', 'smp.name', $q])->distinct()->orderBy('smp')->all();
-        /*$data = Smp::find()->select('name')->where(['like', 'name', $q])->distinct()->orderBy('name')->all();*/
         $out = [];
         foreach ($data as $d) {
             $out[] = ['value' => $d->smpName->name];
@@ -129,10 +130,11 @@ class FrigateController extends Controller
 
     public function actionAddrow()
     {
+        $model = new UploadForm();
         $checklist = new Checklist();
         $smp = new Smp();
         $inspection = new Inspection();
-        return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
+        return $this->render('addrow', compact('checklist', 'smp', 'inspection', 'model'));
     }
 
     public function actionInfo()
@@ -225,12 +227,47 @@ class FrigateController extends Controller
         return $this->render('editrow', compact('checklist'));
     }
 
-    public function actionSaveData()
+    public function saveRows($smp, $inspection, $checklist)
     {
+        $smpId = Smp::find()->where(['name' => $smp->name])->one();
+
+        if (empty($smpId)) {
+            $smp->save();
+            $smpId = Smp::find()->where(['name' => $smp->name])->one();
+        }
+        $checklist->smp = $smpId->id;
+
+        $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
+        if (empty($inspectionId)) {
+            $inspection->save();
+            $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
+        }
+        $checklist->inspection = $inspectionId->id;
+
+        $datefrom = $checklist->datefrom;
+
+        $dateto = $checklist->dateto;
+
+        $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->datefrom, 'yyyy-MM-dd') . "']::timestamp[]");
+
+        $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->dateto, 'yyyy-MM-dd') . "']::timestamp[]");
+
+        $checklist->save(false);
+
+        $checklist->datefrom = $datefrom;
+
+        $checklist->dateto = $dateto;
+
+        return $this->render('success');
+    }
+
+
+    public function actionSaveData($data = null)
+    {
+
         $checklist = new Checklist();
         $smp = new Smp();
         $inspection = new Inspection();
-
         if (
             $smp->load(Yii::$app->request->get()) &&
             $inspection->load(Yii::$app->request->get()) &&
@@ -239,42 +276,45 @@ class FrigateController extends Controller
             $inspection->validate() &&
             $checklist->validate()
         ) {
-            $smpId = Smp::find()->where(['name' => $smp->name])->one();
-
-            if (empty($smpId)) {
-                $smp->save();
-                $smpId = Smp::find()->where(['name' => $smp->name])->one();
-            }
-            $checklist->smp = $smpId->id;
-
-            $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
-            if (empty($inspectionId)) {
-                $inspection->save();
-                $inspectionId = Inspection::find()->where(['name' => $inspection->name])->one();
-            }
-            $checklist->inspection = $inspectionId->id;
-
-            $datefrom = $checklist->datefrom;
-
-            $dateto = $checklist->dateto;
-
-            $checklist->datefrom = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->datefrom, 'yyyy-MM-dd') . "']::timestamp[]");
-
-            $checklist->dateto = new \yii\db\Expression("ARRAY['" . Yii::$app->formatter->asDate($checklist->dateto, 'yyyy-MM-dd') . "']::timestamp[]");
-
-            $checklist->save(false);
-
-            $checklist->datefrom = $datefrom;
-
-            $checklist->dateto = $dateto;
-
-            return $this->render('success');
+            $this->saveRows($smp, $inspection, $checklist);
+        } elseif (!empty($data))
+        {
+            $smp->name = $data[0];
+            $inspection->name = $data[1];
+            $checklist->datefrom = $data[2];
+            $checklist->dateto = $data[3];
+            $checklist->duration = $data[4];
+            $this->saveRows($smp, $inspection, $checklist);
         }
-        return $this->render('addrow', compact('checklist', 'smp', 'inspection'));
+        return $this->actionAddrow();
     }
 
     public function actionImportCsv()
     {
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->file = UploadedFile::getInstance($model, 'file');
+            var_dump($model->validate());
+
+            if ($model->file && $model->validate()) {
+                $path = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
+                $model->file->saveAs($path);
+                ini_set("auto_detect_line_endings", true);
+                $handle = fopen($path, "r");
+                while (($csvArray = fgetcsv($handle, 1000, ';')) !== false )
+                {
+                    $this->actionSaveData($csvArray);
+                }
+                fclose($handle);
+                unlink($path);
+            }
+        }
+
+
+
+
+
 
     }
 

@@ -80,19 +80,26 @@ $this->title = Yii::$app->name;
             </div>
             <div class="row form-group row">
                 <div class="offset-md-4 offset-sm-3 col-sm-2 col-form-label">
-                    <!--Кнопка поиска-->
+
                     <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary',]) ?>
-                    <!--Конец кнопки поиска-->
+
                 </div>
                 <div class="col-sm-4 col-form-label">
-                    <!--Кнопка с выпадающим списком-->
-                    <button type="button" class="btn btn-primary">
-                        Импорт из Excell
-                    </button>
+
+                    <?php ActiveForm::end(); ?>
+                    <?php $form = ActiveForm::begin(
+                        ['id' => 'impotcsv', 'method' => 'post', 'action' => 'frigate/addrow']
+                    ); ?>
+                    <?= $form->field($model, 'file')->fileInput()->label(false) ?>
+                    <?= Html::submitButton('Импорт из CSV', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/import-csv']), 'value' => 'import-csv']) ?>
+                    <?php ActiveForm::end(); ?>
+                    <!--<button type="button" class="btn btn-primary">
+                        Импорт из CSV
+                    </button>-->
                 </div>
             </div>
             <!--Конец кнопки с выпадающим списком-->
-            <?php ActiveForm::end(); ?>
+
         </div>
     </div>
 </div>
