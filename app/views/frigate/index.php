@@ -145,7 +145,7 @@ $this->title = Yii::$app->name;
             <div class="row">
                 <div class="col-md-10">
                     <h5 style="text-align: center; background: <?php
-                    switch ($deleteMessage) {
+                    switch ($message) {
                         case 'Успешно удалено!' :
                             echo 'lightgreen';
                             break;
@@ -153,7 +153,7 @@ $this->title = Yii::$app->name;
                             echo '#ff9da4';
                             break;
                     }
-                    ?>; padding: 15px;"><?= $deleteMessage ?></h5>
+                    ?>; padding: 15px;"><?= $message ?></h5>
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
                         <?php
                         if (!empty($mydata)){

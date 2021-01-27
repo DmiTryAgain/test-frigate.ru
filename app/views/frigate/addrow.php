@@ -93,13 +93,8 @@ $this->title = Yii::$app->name;
                     <?= $form->field($model, 'file')->fileInput()->label(false) ?>
                     <?= Html::submitButton('Импорт из CSV', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/import-csv']), 'value' => 'import-csv']) ?>
                     <?php ActiveForm::end(); ?>
-                    <!--<button type="button" class="btn btn-primary">
-                        Импорт из CSV
-                    </button>-->
                 </div>
             </div>
-            <!--Конец кнопки с выпадающим списком-->
-
         </div>
     </div>
 </div>

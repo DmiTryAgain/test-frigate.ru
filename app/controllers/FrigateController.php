@@ -83,7 +83,7 @@ class FrigateController extends Controller
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
         $error = 'Введён некорректный формат даты';
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'],$error)) {
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'], $error)) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
         }
         if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'], $error)) {
@@ -119,13 +119,13 @@ class FrigateController extends Controller
         return [$mydata, $pages, $checklist];
     }
 
-    public function actionIndex($deleteMessage = null)
+    public function actionIndex($message = null)
     {
         $checklist = new Checklist();
         $arr = $this->getData();
         $mydata = $arr[0];
         $pages = $arr[1];
-        return $this->render('index', compact('mydata', 'pages', 'checklist', 'deleteMessage'));
+        return $this->render('index', compact('mydata', 'pages', 'checklist', 'message'));
     }
 
     public function actionAddrow()
@@ -140,6 +140,11 @@ class FrigateController extends Controller
     public function actionInfo()
     {
         return $this->render('info');
+    }
+
+    public function actionError($data)
+    {
+        return $this->render('error', compact('data'));
     }
 
     public function actionGetCsv()
@@ -169,28 +174,28 @@ class FrigateController extends Controller
     public function actionDeleteRow()
     {
         $checklist = new Checklist();
-        $deleteMessage = 'Выберете строку для удаления!';
+        $message = 'Выберете строку для удаления!';
         if (!empty(Yii::$app->request->get('Checklist')['id'])) {
             $deleteRow = Checklist::findOne(Yii::$app->request->get('Checklist')['id']);
             if ($deleteRow) {
                 $deleteRow->delete();
-                $deleteMessage = 'Успешно удалено!';
+                $message = 'Успешно удалено!';
             }
         }
-        return $this->actionIndex($deleteMessage);
+        return $this->actionIndex($message);
     }
 
     public function actionEditData()
     {
 
-        if (!empty(Yii::$app->request->get('Checklist')['id'])){
+        if (!empty(Yii::$app->request->get('Checklist')['id'])) {
             $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName'])->where(['=', 'checklist.id', Yii::$app->request->get('Checklist')['id']])->one();
             $checklist->datefrom = Yii::$app->formatter->asDate($checklist->datefrom[0]);
             $checklist->dateto = Yii::$app->formatter->asDate($checklist->dateto[0]);
             return $this->render('editrow', compact('checklist'));
         } else {
-            $deleteMessage = 'Выберете строку для редактирования!';
-            return $this->actionIndex($deleteMessage);
+            $message = 'Выберете строку для редактирования!';
+            return $this->actionIndex($message);
         }
     }
 
@@ -258,13 +263,12 @@ class FrigateController extends Controller
 
         $checklist->dateto = $dateto;
 
-        return $this->render('success');
     }
 
 
     public function actionSaveData($data = null)
     {
-
+        $model = new UploadForm();
         $checklist = new Checklist();
         $smp = new Smp();
         $inspection = new Inspection();
@@ -277,45 +281,51 @@ class FrigateController extends Controller
             $checklist->validate()
         ) {
             $this->saveRows($smp, $inspection, $checklist);
-        } elseif (!empty($data))
-        {
+            return $this->render('success');
+        } elseif (!empty($data)) {
             $smp->name = $data[0];
             $inspection->name = $data[1];
             $checklist->datefrom = $data[2];
             $checklist->dateto = $data[3];
             $checklist->duration = $data[4];
-            $this->saveRows($smp, $inspection, $checklist);
+            if ($smp->validate() &&
+                $inspection->validate() &&
+                $checklist->validate()) {
+                return $this->render('success');
+            } else {
+                return false;
+            }
         }
-        return $this->actionAddrow();
     }
 
     public function actionImportCsv()
     {
         $model = new UploadForm();
-
+        $checklist = new Checklist();
+        $smp = new Smp();
+        $inspection = new Inspection();
         if (Yii::$app->request->isPost) {
             $model->file = UploadedFile::getInstance($model, 'file');
-            var_dump($model->validate());
-
             if ($model->file && $model->validate()) {
                 $path = 'uploads/' . $model->file->baseName . '.' . $model->file->extension;
                 $model->file->saveAs($path);
                 ini_set("auto_detect_line_endings", true);
                 $handle = fopen($path, "r");
-                while (($csvArray = fgetcsv($handle, 1000, ';')) !== false )
-                {
-                    $this->actionSaveData($csvArray);
+                while (($csvArray = fgetcsv($handle, 10000, ';')) !== false) {
+                    $data = mb_convert_encoding($csvArray, 'utf-8', 'windows-1251');
+                    if ($this->actionSaveData($data) === false) {
+                        fclose($handle);
+                        unlink($path);
+                        return $this->actionError($data);
+                    }
                 }
                 fclose($handle);
                 unlink($path);
+                return $this->render('success');
+            } else {
+                return $this->render('addrow', compact('checklist', 'smp', 'inspection', 'model'));
             }
         }
-
-
-
-
-
-
     }
 
 }
