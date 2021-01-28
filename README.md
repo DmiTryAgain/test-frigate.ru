@@ -20,7 +20,7 @@ git clone https://github.com/DmiTryAgain/test-frigate.ru.git
 
 Открыть от имени Администратора cmd.exe
 
-cd C:\path/projects/test-frigate.ru/laradock
+cd C:\path\projects\test-frigate.ru\laradock
 
 docker-compose build php-fpm nginx postgres
 
