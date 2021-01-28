@@ -14,7 +14,7 @@ $this->title = Yii::$app->name;
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
             <?php $form = ActiveForm::begin(
-                ['id' => 'search', 'method' => 'get', 'action' => 'frigate/index']
+                ['id' => 'search', 'method' => 'get', 'action' => 'frigate/index', 'validateOnSubmit' => false, 'enableClientValidation' => false,]
             ); ?>
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Наименование СМП</label>

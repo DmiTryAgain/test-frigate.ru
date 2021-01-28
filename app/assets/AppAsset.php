@@ -25,7 +25,6 @@ class AppAsset extends AssetBundle
         'css/main.css',
     ];
     public $js = [
-        'https://code.jquery.com/jquery-3.5.1.slim.min.js',
         'js/bootstrap.bundle.min.js',
     ];
     public $depends = [

@@ -10,6 +10,7 @@ use app\models\UploadForm;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\Json;
+use yii\validators\DateValidator;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 
@@ -75,13 +76,14 @@ class FrigateController extends Controller
 
     public function getQuery()
     {
+        $validator = new DateValidator();
 
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])) {
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'], $error)) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
         }
-        if (!empty(Yii::$app->request->get('Checklist')['dateto'])) {
+        if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'], $error)) {
             $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
         }
         if (!empty(Yii::$app->request->get('Checklist')['smpName'])) {

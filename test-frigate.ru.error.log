@@ -1457,3 +1457,4 @@ $_SERVER = [
     'PGID' => '1000',
     'GPG_KEYS' => '42670A7FE4D0441C8E4632349E4FDC074A4EF02D 5A52880781F755608BF815FC910DEB46F53EA312',
    
+2021/01/28 11:36:15 [error] 12#12: *1118 FastCGI sent in stderr: "PHP message: PHP Fatal error:  Can't use method return value in write context in /var/www/app/controllers/FrigateController.php on line 121" while reading response header from upstream, client: 172.19.0.1, server: test-frigate.ru, request: "GET / HTTP/1.1", upstream: "fastcgi://172.19.0.5:9000", host: "test-frigate.ru", referrer: "https://test-frigate.ru/?Checklist%5BsmpName%5D=&Checklist%5BinspectionName%5D=&Checklist%5Bdatefrom%5D=22.03.2033&Checklist%5Bdateto%5D=19.12.2022"

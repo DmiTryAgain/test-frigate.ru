@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 
 class  Checklist extends ActiveRecord
 {
+
     public static function tableName()
     {
         return '{{checklist}}';
@@ -31,7 +32,5 @@ class  Checklist extends ActiveRecord
             ['duration', 'integer', 'min' => 0, 'message' => 'Введите целочисленное значение', 'tooSmall' => $durationLenghtMessage],
         ];
     }
-
-
 
 }
