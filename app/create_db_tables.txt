@@ -1,0 +1,49 @@
+create database frigate;
+\c frigate
+
+create table smp(
+id serial primary key,
+name varchar(255)
+);
+
+create table inspection(
+id serial primary key,
+name varchar(255)
+);
+
+create table checklist(
+id serial primary key,
+smp integer references smp(id),
+inspection integer references inspection(id),
+datefrom timestamp with time zone [0],
+dateto timestamp with time zone [0],
+duration integer
+);
+
+insert into smp (name) values ('ООО "Колосок"');
+insert into smp (name) values ('ИП "Бандурин А.И."');
+insert into smp (name) values ('ИП "Бандюков Ю.В."');
+insert into smp (name) values ('ПАО "МТС"');
+insert into smp (name) values ('ООО "Мишкино"');
+insert into smp (name) values ('ОАО "Деренжер"');
+insert into inspection (name) values ('Роскомнадзор');
+insert into inspection (name) values ('Налоговая');
+insert into inspection (name) values ('Природнадзор');
+insert into inspection (name) values ('Наркология');
+insert into inspection (name) values ('Пожарная безопаснеость');
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 2, '{2009-06-12}', '{2009-06-17}', 5);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 3, '{2009-07-15}', '{2009-07-19}', 9);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (2, 3, '{2010-09-06}', '{2010-09-11}', 20);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (3, 1, '{2012-02-16}', '{2012-02-22}', 11);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (4, 5, '{2012-12-12}', '{2012-12-14}', 7);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (3, 4, '{2013-03-01}', '{2013-03-06}', 3);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (1, 4, '{2013-01-17}', '{2013-01-23}', 9);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (2, 2, '{2013-05-01}', '{2013-05-05}', 20);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (3, 1, '{2014-01-14}', '{2014-01-20}', 11);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (6, 1, '{2018-12-13}', '{2018-12-16}', 7);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (3, 4, '{2018-08-06}', '{2018-08-17}', 3);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (6, 5, '{2018-09-24}', '{2018-09-28}', 9);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (2, 5, '{2019-09-22}', '{2019-09-25}', 20);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (6, 1, '{2020-04-16}', '{2020-04-18}', 11);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (4, 2, '{2021-11-11}', '{2021-11-17}', 7);
+insert into checklist(smp, inspection, datefrom, dateto, duration) values (3, 4, '{2021-06-08}', '{2021-06-11}', 3);
