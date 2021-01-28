@@ -96,7 +96,7 @@ class m210128_123248_create_db_tables extends Migration
                     'inspection' => $value['inspection'],
                     'datefrom' => new Expression($value['datefrom']),
                     'dateto' => new Expression($value['dateto']),
-                    'duration' => new Expression($value['duration']),]);
+                    'duration' => $value['duration'],]);
         }
 
     }
