@@ -10,9 +10,7 @@ use app\models\UploadForm;
 use Yii;
 use yii\data\Pagination;
 use yii\helpers\Json;
-use yii\validators\DateValidator;
 use yii\web\Controller;
-use yii\validators\Validator;
 use yii\web\UploadedFile;
 
 class FrigateController extends Controller
@@ -78,18 +76,14 @@ class FrigateController extends Controller
     public function getQuery()
     {
 
-        $validator = new DateValidator();
-
         $checklist = Checklist::find()->joinWith(['smpName', 'inspectionName']);
 
-        $error = 'Введён некорректный формат даты';
-        if (!empty(Yii::$app->request->get('Checklist')['datefrom']) && $validator->validate(Yii::$app->request->get('Checklist')['datefrom'], $error)) {
+        if (!empty(Yii::$app->request->get('Checklist')['datefrom'])) {
             $checklist->andWhere(['=', 'datefrom', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['datefrom'], 'yyyy-MM-dd') . '}']);
         }
-        if (!empty(Yii::$app->request->get('Checklist')['dateto']) && $validator->validate(Yii::$app->request->get('Checklist')['dateto'], $error)) {
+        if (!empty(Yii::$app->request->get('Checklist')['dateto'])) {
             $checklist->andWhere(['=', 'dateto', '{' . Yii::$app->formatter->asDate(Yii::$app->request->get('Checklist')['dateto'], 'yyyy-MM-dd') . '}']);
         }
-
         if (!empty(Yii::$app->request->get('Checklist')['smpName'])) {
             $checklist->andWhere(['ilike', 'smp.name', Yii::$app->request->get('Checklist')['smpName']])->distinct();
         }
@@ -97,7 +91,6 @@ class FrigateController extends Controller
             $checklist->andWhere(['ilike', 'inspection.name', Yii::$app->request->get('Checklist')['inspectionName']])->distinct();
         }
         return $checklist->orderBy(['smp' => SORT_DESC]);
-
     }
 
     public function getPages($checklist)
@@ -291,11 +284,11 @@ class FrigateController extends Controller
             if ($smp->validate() &&
                 $inspection->validate() &&
                 $checklist->validate()) {
-                return $this->render('success');
+                $this->saveRows($smp, $inspection, $checklist);
             } else {
                 return false;
             }
-        }
+        } else return $this->render('addrow', compact('checklist', 'smp', 'inspection', 'model'));
     }
 
     public function actionImportCsv()
@@ -327,5 +320,4 @@ class FrigateController extends Controller
             }
         }
     }
-
 }

@@ -11,7 +11,6 @@ use yii\helpers\Url;
 $this->title = Yii::$app->name;
 
 ?>
-<?php //var_dump($checklist->datefrom); ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
@@ -80,19 +79,16 @@ $this->title = Yii::$app->name;
             </div>
             <div class="row form-group row">
                 <div class="offset-md-4 offset-sm-3 col-sm-2 col-form-label">
-
                     <?= Html::submitButton('Добавить', ['class' => 'btn btn-primary',]) ?>
-
                 </div>
                 <div class="col-sm-4 col-form-label">
-
-                    <?php ActiveForm::end(); ?>
-                    <?php $form = ActiveForm::begin(
+                    <?php ActiveForm::end();
+                    $form = ActiveForm::begin(
                         ['id' => 'impotcsv', 'method' => 'post', 'action' => 'frigate/addrow']
-                    ); ?>
-                    <?= $form->field($model, 'file')->fileInput()->label(false) ?>
-                    <?= Html::submitButton('Импорт из CSV', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/import-csv']), 'value' => 'import-csv']) ?>
-                    <?php ActiveForm::end(); ?>
+                    );
+                    echo $form->field($model, 'file')->fileInput()->label(false);
+                    echo Html::submitButton('Импорт из CSV', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/import-csv']), 'value' => 'import-csv']);
+                    ActiveForm::end(); ?>
                 </div>
             </div>
         </div>

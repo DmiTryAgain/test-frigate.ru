@@ -11,7 +11,6 @@ use yii\helpers\Url;
 $this->title = Yii::$app->name;
 
 ?>
-<?php //var_dump($checklist->datefrom); ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
@@ -21,7 +20,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Выбор СМП</label>
                 <div class="col-md-6">
-                    <?= $form->field($checklist->smpName, 'name')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist->smpName, 'name')->widget(Typeahead::className(), [
                         'name' => 'smp',
                         'options' => ['placeholder' => 'Наименование СМП ...'],
                         'scrollable' => true,
@@ -45,7 +44,7 @@ $this->title = Yii::$app->name;
             <div class="row form-group row">
                 <label for="inputOrgan" class="col-md-4 col-form-label">Контролирующий орган</label>
                 <div class="col-md-6">
-                    <?= $form->field($checklist->inspectionName, 'name')->widget(Typeahead::className(),[
+                    <?= $form->field($checklist->inspectionName, 'name')->widget(Typeahead::className(), [
                         'name' => 'inspection',
                         'options' => ['placeholder' => 'Контролирующий орган ...'],
                         'scrollable' => true,
@@ -83,19 +82,10 @@ $this->title = Yii::$app->name;
             </div>
             <div class="row form-group row">
                 <div class="offset-md-4 offset-sm-3 col-sm-2 col-form-label">
-                    <!--Кнопка поиска-->
-                    <?= Html::submitButton('Редактировать', ['class' => 'btn btn-primary',]) ?>
-                    <!--Конец кнопки поиска-->
+                    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary',]) ?>
                 </div>
-                <div class="col-sm-4 col-form-label">
-                    <!--Кнопка с выпадающим списком-->
-                    <button type="button" class="btn btn-primary">
-                        Импорт из Excell
-                    </button>
-                </div>
+                <?php ActiveForm::end(); ?>
             </div>
-            <!--Конец кнопки с выпадающим списком-->
-            <?php ActiveForm::end(); ?>
         </div>
     </div>
 </div>

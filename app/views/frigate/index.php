@@ -10,14 +10,12 @@ use yii\helpers\Url;
 $this->title = Yii::$app->name;
 
 ?>
-<?php /*print_r($_GET)*/ ?>
 <div class="container-fluid" style="margin-top: 50px;">
     <div class="row">
         <div class="offset-lg-2 col-lg-10">
             <?php $form = ActiveForm::begin(
                 ['id' => 'search', 'method' => 'get', 'action' => 'frigate/index']
             ); ?>
-
             <div class="row form-group row">
                 <label for="smp" class="col-md-4 col-form-label">Наименование СМП</label>
                 <div class="col-md-6">
@@ -113,31 +111,28 @@ $this->title = Yii::$app->name;
                 </div>
             </div>
             <div class="row form-group row">
-
                 <div class="offset-xl-4 offset-md-3 offset-sm-2 col-sm-2 col-xl-1 col-form-label">
-                    <!--Кнопка поиска-->
                     <?= Html::submitButton('Поиск', ['class' => 'btn btn-primary', 'formaction' => Url::to(['frigate/index']), 'value' => 'search']) ?>
-                    <!--Конец кнопки поиска-->
                 </div>
                 <div class="col-sm-2 col-xl-3 col-form-label">
                     <?= Html::resetButton('Очистить', ['class' => 'btn btn-secondary']) ?>
                 </div>
                 <div class="col-sm-2 col-form-label">
-                    <!--Кнопка с выпадающим списком-->
                     <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Дополнительные действия
                     </button>
                     <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                        <a class="dropdown-item badge-success" href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать найденное в Excell</a>
+                        <a class="dropdown-item badge-success"
+                           href="<?= Url::to(['frigate/get-csv?' . Yii::$app->request->getQueryString()]) ?>">Экспортировать
+                            найденное в CSV</a>
                         <?= Html::input('submit', '', 'Удалить отмеченное', ['class' => 'dropdown-item badge-danger', 'formaction' => Url::to(['frigate/delete-row'])]) ?>
                         <?= Html::input('submit', '', 'Редактировать отмеченное', ['class' => 'dropdown-item alert-secondary', 'formaction' => Url::to(['frigate/edit-data'])]) ?>
-                        <a class="dropdown-item badge-info" href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
+                        <a class="dropdown-item badge-info"
+                           href="<?= yii\helpers\Url::to('frigate/addrow') ?>">Добавить</a>
                     </div>
                 </div>
             </div>
-            <!--Конец кнопки с выпадающим списком-->
-
         </div>
     </div>
     <div class="row">
@@ -155,10 +150,7 @@ $this->title = Yii::$app->name;
                     }
                     ?>; padding: 15px;"><?= $message ?></h5>
                     <table class="table table-bordered table-responsive-lg" style="text-align: center">
-                        <?php
-                        if (!empty($mydata)){
-
-                        ?>
+                        <?php if (!empty($mydata)){ ?>
                         <tr class="table-primary">
                             <th scope="col" rowspan="2">Отметить выбор</th>
                             <th scope="col" rowspan="2">Проверяемый СМП</th>

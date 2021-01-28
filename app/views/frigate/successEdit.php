@@ -2,12 +2,6 @@
 
 /* @var $this yii\web\View */
 
-use kartik\form\ActiveForm;
-use kartik\typeahead\Typeahead;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use kartik\export\ExportMenu;
-use yii\web\UrlManager;
 
 $this->title = Yii::$app->name;
 
