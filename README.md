@@ -36,7 +36,7 @@ psql -U default -W
 
 Ведите пароль (secret)
 
-\c frigate
+create database frigate;
 
 \q
 
